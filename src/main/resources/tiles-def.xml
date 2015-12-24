@@ -1,0 +1,30 @@
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+  "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+    <!-- = Base definition = -->
+    <!-- 페이지 기본 (navbar 포함) -->
+    <definition name="layout.main" template="/layouts/main.jsp">
+        <put-attribute name="content" value="/tiles/common/empty.jsp" />
+        <put-attribute name="script" value="/tiles/common/empty.jsp" />
+    </definition>
+
+    <!-- 페이지 기본 (navbar 없음) -->
+    <definition name="layout.content" template="/layouts/content.jsp">
+        <put-attribute name="content" value="/tiles/common/empty.jsp" />
+        <put-attribute name="script" value="/tiles/common/empty.jsp" />
+    </definition>
+
+    <!-- = Implement definition = -->
+    <!-- 서브 페이지 -->
+    <definition name="MAIN/*/*" extends="layout.main">
+        <put-attribute name="content" value="/tiles/{1}/{2}.jsp" />
+        <put-attribute name="script" value="/tiles/{1}/{2}_script.jsp" />
+    </definition>
+
+    <definition name="CONTENT/*/*" extends="layout.content">
+        <put-attribute name="content" value="/tiles/{1}/{2}.jsp" />
+        <put-attribute name="script" value="/tiles/{1}/{2}_script.jsp" />
+    </definition>
+</tiles-definitions>
