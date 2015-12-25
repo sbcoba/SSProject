@@ -2938,6 +2938,9 @@ ul.messagesList li span.date {
 	padding: 5px 40px 5px 10px;
 }
 
+
+.horizon li {list-style: none; display: inline}
+
 /* Retina Display Hack
 =================================================================== */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -2971,5 +2974,4 @@ ul.messagesList li span.date {
 		background: url(../img/chat-right-metro@2x.png) no-repeat 0px 0px;
 		background-size: 100%;
 	}
-    
 }
