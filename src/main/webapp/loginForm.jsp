@@ -99,8 +99,6 @@
         </div>
         <!-- modal end -->
     </div>
-
-
     <!-- Javascript -->
     <script src="${ctx}/js/jquery.min.js"></script>
     <script src="${ctx}/js/metro/bootstrap.min.js"></script>
