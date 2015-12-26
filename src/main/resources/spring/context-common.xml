@@ -30,7 +30,7 @@
     </bean>    
 
     <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
-        <jdbc:script location="classpath:h2db/source.sql" encoding="UTF-8" /><!-- encoding 프로퍼티 추가로 톰캣 최초 실행시 insert 부분 한글깨짐 해결  -->
+        <jdbc:script location="classpath:h2db/sql_*.sql"  /><!-- encoding 프로퍼티 추가로 톰캣 최초 실행시 insert 부분 한글깨짐 해결  -->
     </jdbc:initialize-database>
 
     <bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
