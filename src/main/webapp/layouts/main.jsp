@@ -177,10 +177,8 @@
                         <a href="#">Dashboard</a>
                     </li>
                 </ul>
-            </div>
-
             <tiles:insertAttribute name="content" />
-
+            </div>
             <!-- end: Content -->
         </div>
         <!--/#content.span10-->
