@@ -10,6 +10,7 @@
     <resources mapping="/resources/**" location="/resources/" />
     <resources mapping="/js/**" location="/js/" /> 
     <resources mapping="/css/**" location="/css/" />
+    <resources mapping="/img/**" location="/img/" />
 
     <context:component-scan base-package="com" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
