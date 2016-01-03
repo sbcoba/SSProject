@@ -16,11 +16,19 @@
 <!-- end: Mobile Specific -->
 
 <!-- start: CSS -->
-<link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-style">
+
 <link href="${ctx}/css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="${ctx}/css/style.css" rel="stylesheet" id="base-style">
 <link href="${ctx}/css/style-responsive.css" rel="stylesheet" id="base-style-responsive">
+<link href="${ctx}/css/style.css" rel="stylesheet" id="base-style">
+<link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-style">
+
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+<style type="text/css">
+.form-horizontal .control-label {
+	width:110px
+}
+</style>
+
 <!-- end: CSS -->
 
 
@@ -206,6 +214,7 @@
 
     <!-- start: JavaScript-->
     <script src="${ctx}/js/jquery.min.js"></script>
+    <script src="${ctx}/js/jquery.tabulatez.js"></script>
 
     <script src="${ctx}/js/metro/jquery-migrate-1.0.0.min.js"></script>
     <script src="${ctx}/js/metro/jquery-ui-1.10.0.custom.min.js"></script>
@@ -238,6 +247,7 @@
     <script src="${ctx}/js/metro/counter.js"></script>
     <script src="${ctx}/js/metro/retina.js"></script>
     <script src="${ctx}/js/metro/custom.js"></script>
+    <script src="${ctx}/js/comm_script.js"></script>
     <!-- end: JavaScript-->
 <tiles:insertAttribute name="script" />
 </body>
