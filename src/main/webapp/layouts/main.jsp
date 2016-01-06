@@ -19,7 +19,7 @@
 <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-style">
 <link href="${ctx}/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="${ctx}/css/style.css" rel="stylesheet" id="base-style">
-<link href="${ctx}/css/style-responsive.css" rel="styles#heet" id="base-style-responsive">
+<link href="${ctx}/css/style-responsive.css" rel="stylesheet" id="base-style-responsive">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 <style type="text/css">
 .form-horizontal .control-label {/*등록 폼 Title 들여쓰기 조정*/
