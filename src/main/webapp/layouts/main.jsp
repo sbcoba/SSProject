@@ -105,26 +105,20 @@
 <!-- end: Header Menu -->
 
     <div class="container-fluid-full">
-        <div class="row-fluid">
+        <div class="row-fluid" style="border:3 solid green">
 
             <!-- start: Main Menu -->
             <div id="sidebar-left" class="span2">
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
                         <li>
-                            <a href="index.html"><i class="icon-bar-chart"></i> <span class="hidden-tablet"> Dashboard</span></a>
+                            <a href="list.do"><i class="icon-bar-chart"></i> <span class="hidden-tablet"> 공통분류코드</span></a>
                         </li>
                         <li>
-                            <a href="messages.html"><i class="icon-envelope"></i> <span class="hidden-tablet"> Messages</span></a>
+                            <a href="tasks.html"><i class="icon-tasks"></i> <span class="hidden-tablet"> 비품분류코드</span></a>
                         </li>
                         <li>
-                            <a href="tasks.html"><i class="icon-tasks"></i> <span class="hidden-tablet"> Tasks</span></a>
-                        </li>
-                        <li>
-                            <a href="ui.html"><i class="icon-eye-open"></i> <span class="hidden-tablet"> UI Features</span></a>
-                        </li>
-                        <li>
-                            <a href="widgets.html"><i class="icon-dashboard"></i> <span class="hidden-tablet"> Widgets</span></a>
+                            <a href="ui.html"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
                         </li>
                         <li>
                             <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Dropdown</span> <span class="label label-important"> 3 </span></a>
@@ -140,6 +134,7 @@
                                 </li>
                             </ul>
                         </li>
+<!-- 
                         <li>
                             <a href="form.html"><i class="icon-edit"></i> <span class="hidden-tablet"> Forms</span></a>
                         </li>
@@ -166,7 +161,7 @@
                         </li>
                         <li>
                             <a href="login.html"><i class="icon-lock"></i> <span class="hidden-tablet"> Login Page</span></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
