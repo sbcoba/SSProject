@@ -22,7 +22,7 @@ public class CommonCodeController {
         System.out.println("test...");
     }
     
-    @RequestMapping(value = "/api/002000000/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/002000000/insert",method=RequestMethod.POST)
     public String api001000000insert( @Valid @ModelAttribute FixInfo fix, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
         System.out.println("test...");
         
