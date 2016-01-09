@@ -86,13 +86,13 @@
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">입사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_1" style="width:150px" readonly>
+								<input class="form-control cDatePicker" type="text" id="date_1">
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">퇴사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_2" style="width:150px" readonly>
+								<input class="form-control cDatePicker" type="text" id="date_2">
 							</div>
 						</div>
 					</form>
@@ -107,4 +107,3 @@
 <!-- modal end -->
 </div>
 <!-- page.contents -->
-
