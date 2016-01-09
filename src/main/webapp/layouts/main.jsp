@@ -112,13 +112,13 @@
                 <div class="nav-collapse sidebar-nav">
                     <ul class="nav nav-tabs nav-stacked main-menu">
                         <li>
-                            <a href="list.do"><i class="icon-bar-chart"></i> <span class="hidden-tablet"> 공통분류코드</span></a>
+                            <a href="${ctx}/content/001000000/list.do"><i class="icon-bar-chart"></i> <span class="hidden-tablet"> 공통분류코드</span></a>
                         </li>
                         <li>
-                            <a href="tasks.html"><i class="icon-tasks"></i> <span class="hidden-tablet"> 비품분류코드</span></a>
+                            <a href="${ctx}/content/002000000/list.do"><i class="icon-tasks"></i> <span class="hidden-tablet"> 비품분류코드</span></a>
                         </li>
                         <li>
-                            <a href="ui.html"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
+                            <a href="${ctx}/content/003000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
                         </li>
                         <li>
                             <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Dropdown</span> <span class="label label-important"> 3 </span></a>
