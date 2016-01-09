@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "/content/{menuId}/{act}", method = RequestMethod.GET)
+    @RequestMapping(value = "/content/{menuId}/{act}")
     public String main(@PathVariable("menuId") String menuId, @PathVariable("act") String act, HttpServletRequest request, HttpSession session, Model model) throws Exception {
         return "MAIN/" + menuId + "/" + act;
     }

@@ -16,20 +16,19 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <!-- <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->
-<!-- 
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <property name="order" value="0" />
-    </bean>
+    <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="webBindingInitializer">
-            <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-                <property name="validator" ref="validator" />
-            </bean>
-        </property>
-    </bean>
- -->
+    <beans:bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <beans:property name="order" value="0" />
+    </beans:bean>
+
+    <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <beans:property name="webBindingInitializer">
+            <beans:bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+                <beans:property name="validator" ref="validator" />
+            </beans:bean>
+        </beans:property>
+    </beans:bean>
 
     <!-- Tiles2 -->
     <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
