@@ -2,14 +2,14 @@
 	contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../../inc/common.jsp"%>
 <script>
-	var apiUrl = '${ctx}/api/001000000/'
+	var apiUrl = '${ctx}/api/003000000/'
 
 	$(function() {
 		$('#list').tabulate({
 			source : function(data) {
 				return alert("hi");
 				$.ajax({
-					url : baseApiUrl + 'page.do?',
+					url : apiUrl + 'page.do?',
 					dataType : 'json',
 					cache : false
 				});
@@ -42,4 +42,18 @@
 	function showInsertForm() {
 		$('#insertForm').modal();
 	}
+	$('#emp').submit(function(){
+		dataString = $("#emp").serialize();
+		$.ajax({
+			url : apiUrl + 'insert.do?',
+			data: dataString,
+			dataType : 'json',
+			type: 'POST',
+			cache : false,
+			succes : function(data) {
+							alert("hi");
+			}
+		});
+	});
+
 </script>
