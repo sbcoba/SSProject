@@ -38,6 +38,10 @@
         })/* .on('render', cellEllipsis).trigger('load'); */
     });
 
+    $('#insertForm').submit(function (e) {
+        
+    });
+
     function showInsertForm() {
         $('#insertForm').modal();
     }
