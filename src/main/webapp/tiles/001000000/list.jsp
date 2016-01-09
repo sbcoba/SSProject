@@ -40,7 +40,7 @@
     <div id="insertForm" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <form id="form" method="get">
+            <form id="form" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

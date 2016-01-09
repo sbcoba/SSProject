@@ -40,11 +40,11 @@
 
     $('#form').submit(function () {
         $.ajax({
-            url: apiUrl + 'insert.do?',
+            url: apiUrl + 'insert.do?' + $('#form').serialize(),
+            type: 'GET',
             dataType: 'json',
             cache: false,
             success : function () {
-                alert("hi");
             }
         });
     })
