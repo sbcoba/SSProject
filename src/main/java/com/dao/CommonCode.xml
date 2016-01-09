@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CommonCodeMapper">
+    <resultMap type="com.vo.CommonCode" id="resultMap">
+        <id column = "CD_TP" property="cdTp" jdbcType="VARCHAR" />
+        <id column = "CD_V" property="cdV" jdbcType="VARCHAR" />
+        <result column = "CD_NM" property="cdNm" jdbcType="VARCHAR" />
+        <result column = "CD_SORT" property="cdSort" jdbcType="NUMERIC" />
+        <result column = "CD_USE" property="cdUse" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.vo.CommonCode">
+        INSERT INTO base_cd
+                    (cd_tp,
+                     cd_v,
+                     cd_nm,
+                     cd_sort,
+                     cd_use)
+        VALUES     (#{cdTp},
+                    #{cdV},
+                    #{cdNm}
+                    #{cdSort}
+                    #{cdUse})
+    </insert>
+</mapper>
