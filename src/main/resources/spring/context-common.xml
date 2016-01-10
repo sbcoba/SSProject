@@ -1,39 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/jdbc
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc
     http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
     http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <!-- NonMapper..
-    <util:properties id="contextProperties" location="classpath:context.oracle.properties" />
+	<!-- NonMapper.. <util:properties id="contextProperties" location="classpath:context.oracle.properties" 
+		/> <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource"> 
+		<property name="driver" value="#{contextProperties['jdbc.driver']}" /> <property 
+		name="url" value="#{contextProperties['jdbc.url']}" /> <property name="username" 
+		value="#{contextProperties['jdbc.username']}" /> <property name="password" 
+		value="#{contextProperties['jdbc.password']}" /> <property name="poolPingEnabled" 
+		value="true" /> <property name="poolPingQuery" value="SELECT 1 FROM DUAL" 
+		/> <property name="poolPingConnectionsNotUsedFor" value="21600" /> </bean> -->
 
-    <bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-        <property name="driver" value="#{contextProperties['jdbc.driver']}" />
-        <property name="url" value="#{contextProperties['jdbc.url']}" />
-        <property name="username" value="#{contextProperties['jdbc.username']}" />
-        <property name="password" value="#{contextProperties['jdbc.password']}" />
-        <property name="poolPingEnabled" value="true" />
-        <property name="poolPingQuery" value="SELECT 1 FROM DUAL" />
-        <property name="poolPingConnectionsNotUsedFor" value="21600" />
-    </bean> -->
+	<!-- 관리자 : http://localhost:8080/console -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="url"
+			value="jdbc:h2:mem:test;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
 
-    <!-- 관리자 : http://localhost:8080/console -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
-    </bean>    
+	<jdbc:initialize-database data-source="dataSource"
+		ignore-failures="DROPS">
+		<jdbc:script location="classpath:h2db/sql_*.sql" /><!-- encoding 
+			프로퍼티 추가로 톰캣 최초 실행시 insert 부분 한글깨짐 해결 -->
+	</jdbc:initialize-database>
 
-    <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
-        <jdbc:script location="classpath:h2db/sql_*.sql"  /><!-- encoding 프로퍼티 추가로 톰캣 최초 실행시 insert 부분 한글깨짐 해결  -->
-    </jdbc:initialize-database>
+	<bean id="leaveaTrace" class="egovframework.rte.fdl.cmmn.trace.LeaveaTrace">
+		<property name="traceHandlerServices">
+			<list>
+				<ref bean="traceHandlerService" />
+			</list>
+		</property>
+	</bean>
 
-    <bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
+	<bean id="traceHandlerService"
+		class="egovframework.rte.fdl.cmmn.trace.manager.DefaultTraceHandleManager">
+		<property name="reqExpMatcher">
+			<ref bean="antPathMater" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>*</value>
+			</list>
+		</property>
+		<property name="handlers">
+			<list>
+				<ref bean="defaultTraceHandler" />
+			</list>
+		</property>
 
-    <!-- <bean id="defaultTraceHandler" class="egovframework.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" /> -->
+	</bean>
+	<bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
+
+	<bean id="defaultTraceHandler"
+		class="egovframework.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" />
 </beans>

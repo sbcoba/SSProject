@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.dao.CommonCodeMapper;
+import com.mapper.CommonCodeMapper;
 import com.vo.CommonCode;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;

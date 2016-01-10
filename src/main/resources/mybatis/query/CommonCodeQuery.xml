@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.CommonCodeMapper">
+<mapper namespace="com.mapper.CommonCodeMapper">
     <resultMap type="com.vo.CommonCode" id="resultMap">
         <id column = "CD_TP" property="cdTp" jdbcType="VARCHAR" />
         <id column = "CD_V" property="cdV" jdbcType="VARCHAR" />
@@ -18,8 +18,8 @@
                      cd_use)
         VALUES     (#{cdTp},
                     #{cdV},
-                    #{cdNm}
-                    #{cdSort}
+                    #{cdNm},
+                    #{cdSort},
                     #{cdUse})
     </insert>
 </mapper>

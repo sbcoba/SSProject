@@ -9,6 +9,6 @@
 
     <typeAliases>
         <typeAlias alias="Map" type="java.util.Map" />
-        <typeAlias alias="PagingParam" type="com.vo.PagingParam" />
+<!--         <typeAlias alias="PagingParam" type="com.vo.PagingParam" /> -->
     </typeAliases>
 </configuration>
