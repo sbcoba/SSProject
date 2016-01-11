@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.EmpMapper">
+    <resultMap type="com.vo.EmpInfo" id="resultMap">
+        <id 	column = "E_NO" 	property="eNo" 	  jdbcType="VARCHAR" />
+        <result column = "E_NM" 	property="eNm" 	  jdbcType="VARCHAR" />
+        <result column = "E_ID" 	property="eId" 	  jdbcType="VARCHAR" />
+        <result column = "E_PW" 	property="ePw" 	  jdbcType="VARCHAR" />
+        <result column = "E_DEPT" 	property="eDept"  jdbcType="VARCHAR" />
+        <result column = "E_POSI" 	property="ePosi"  jdbcType="VARCHAR" />
+        <result column = "E_IN_DT" 	property="eInDt"  jdbcType="VARCHAR" />
+        <result column = "E_OUT_DT"	property="eOutDt" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="createEmpNo" resultType="java.lang.String">
+        SELECT TO_CHAR(SYSDATE, 'YYYY') || LPAD(EMP_NUM_SEQ.NEXTVAL, 3, '0') FROM DUAL
+    </select>
+
+    <insert id="insert" parameterType="com.vo.EmpInfo">
+        INSERT INTO EMP
+                    ( 
+                      E_NO
+                    , E_NM
+                    , E_ID
+                    , E_PW
+                    , E_DEPT
+                    , E_POSI
+                    , E_IN_DT
+                    , E_OUT_dT
+                    )
+             VALUES
+                    (
+                      TO_CHAR(SYSDATE, 'YYYY') || LPAD(EMP_NUM_SEQ.NEXTVAL, 3, '0')
+                    , #{eNm}
+                    , #{eId}
+                    , #{ePw}
+                    , #{eDept}
+                    , #{ePosi}
+                    , #{eInDt}
+                    , #{eOutDt}
+                    )
+    </insert>
+</mapper>

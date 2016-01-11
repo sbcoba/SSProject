@@ -21,3 +21,27 @@ jQuery(document).ready(function() {
      }); 
   }); 
 });	
+
+function setSelectize(objNm, cdTpVal)
+{
+	var jsonVal;
+	$.ajax({
+		url : '/SSProject/com/api/selectizeOptions.do',
+		data : {cdTp : cdTpVal},
+		dataType : 'JSON',
+		type : 'GET',
+		cache : false,
+		success : function(data) {
+			jsonVal = JSON.stringify(data);
+			$('#'+ objNm).selectize({
+				valueField:  'CD_V',
+			    labelField:  'CD_NM',
+			    searchField: 'CD_NM',
+			    options : eval(jsonVal),
+			}); 
+		},
+		error : function(xhr, status, error) {
+			alert("에러발생");
+		}
+	});
+}

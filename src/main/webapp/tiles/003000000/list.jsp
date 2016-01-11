@@ -44,7 +44,6 @@
 	<div id="insertForm" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 		<form class="form-horizontal" id="emp" method="post">
-		<input type="text" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
@@ -73,15 +72,15 @@
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
-							<label class="col-sm-2 control-label" for="formGroupInputSmall">부서</label>
+							<label class="col-sm-2 control-label">부서</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" id="formGroupInputSmall" name="eDept">
+								<select name="eDept" id="eDept" class='selectize-control' placeholder="부서를 선택 해주세요."></select>
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">직책</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" id="formGroupInputSmall" name="ePosi">
+								<select name="ePosi" id="ePosi" class='selectize-control' placeholder="직책을 선택 해주세요."></select>
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
