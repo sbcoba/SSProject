@@ -4,40 +4,67 @@
 <script>
 	var apiUrl = '${ctx}/api/003000000/'
 	var test = "";
-	var test1 = "";
 	$(function() {
-		$('#list').tabulate({
-			source : function(data) {
-				return alert("hi");
-				$.ajax({
-					url : apiUrl + 'page.do?',
+			var tab = $('#list')
+
+			var xhr = function () {
+				return $.ajax({
+					url : apiUrl + 'page.do',
 					dataType : 'json',
-					cache : false
+					type : 'GET',
+					cache : false,
 				});
-			},
-									            renderer: function(r, c, item, dataSet) {
-									                switch (c) {
-									                    case 0:
-									                        return escapeHtml(item.acId);
-									                }
-									            },
-									            cellClass: function(r, c, item, dataSet) {
-									                switch (c) {
-									                    case 0:
-									                    case 1:
-									                    case 2:
-									                        return 'text-center text-middle';
+			};
+			var renderer = function (r, c, item) {
+				switch(c)
+				{
+					case 0:
+						return item.eNo;
 
-									                    case 4:
-									                    case 5:
-									                        return 'cell-ellipsis text-center text-middle ';
+					case 1:
+						return item.eNm;
 
-									                    default:
-									                        return 'text-middle';
-									                }
-									            }, */
-			pagination : $('#pagination')
-		});/* .on('render', cellEllipsis).trigger('load'); */
+					case 2:
+						return item.eId;
+						
+					case 3:
+						return item.ePw;
+						
+					case 4:
+						return item.eDept;
+						
+					case 5:
+						return item.ePosi;
+						
+					case 6:
+						return item.eInDt;
+
+					default:
+						return item.eOutDt;
+				}
+			};
+
+			tab.tabulate({
+
+				source: xhr,
+				renderer: renderer,
+				pagination: $('#pagination'),
+				pagesI18n: function(str) {
+					switch(str) {
+						case 'next':
+							return 'Aage';
+
+						case 'prev':
+							return 'Peeche';
+					}
+				}
+			})
+			.on('loadfailure', function (){
+				console.error(arguments);
+				alert('Failed!');
+			});
+
+			tab.trigger('load');
 		
 		/* 부서 셀렉트박스 */
 		setSelectize('eDept', 'DEPT_CD');
