@@ -18,4 +18,8 @@ public class CommonCodeService extends EgovAbstractServiceImpl {
     public void insert(CommonCode vo) {
         commonCodeMapper.insert(vo);
     }
+
+    public void page() {
+        commonCodeMapper.page();
+    }
 }

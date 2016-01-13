@@ -22,4 +22,13 @@
                     #{cdSort},
                     #{cdUse})
     </insert>
+
+    <select id="page" resultMap="resultMap">
+        SELECT cd_tp,
+               cd_v,
+               cd_nm,
+               cd_sort,
+               cd_use
+          From base_cd
+    </select>
 </mapper>

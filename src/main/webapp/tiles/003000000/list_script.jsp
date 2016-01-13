@@ -14,7 +14,7 @@
 					dataType : 'json',
 					cache : false
 				});
-			},/*
+			},
 									            renderer: function(r, c, item, dataSet) {
 									                switch (c) {
 									                    case 0:

@@ -23,9 +23,10 @@ public class CommonCodeController {
     @Resource
     CommonCodeService commonCodeService;
 
-    @RequestMapping(value = "/api/001000000/page", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/001000000/page")
+    @ResponseBody
     public void api001000000page(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
-        System.out.println("test...");
+        commonCodeService.page();
     }
 
     @RequestMapping(value = "/api/001000000/insert")
