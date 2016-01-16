@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.EmpService;
@@ -36,11 +37,12 @@ public class EmpController {
     
     @ResponseBody
     @RequestMapping(value = "/api/003000000/page", method = RequestMethod.GET)
-    public HashMap<String, List<EmpInfo>> api003000000page() {
+    public HashMap<String, Object> api003000000page(@RequestParam("currPage") int currPage, @RequestParam("pageSize") int pageSize) {
     	
-    	List<EmpInfo> ls = empService.getPage();
-    	HashMap<String, List<EmpInfo>> hm = new HashMap<String, List<EmpInfo>>();
-    	hm.put("items", ls);
+    	HashMap<String, Object> hm = new HashMap<String, Object>();
+    	hm.put("items", empService.getPage(currPage, pageSize));
+    	hm.put("currPage", currPage);
+    	hm.put("totalPages", empService.getTotPage(pageSize));
     	
     	return hm;
     }

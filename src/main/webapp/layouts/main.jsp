@@ -216,6 +216,7 @@
 
     <!-- start: JavaScript-->
     <script src="${ctx}/js/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="${ctx}/js/jquery.tabulatez.js"></script>
 
     <script src="${ctx}/js/metro/jquery-migrate-1.0.0.min.js"></script>

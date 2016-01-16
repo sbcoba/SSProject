@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class CommonCodeService extends EgovAbstractServiceImpl {
         commonCodeMapper.insert(vo);
     }
 
-    public void page() {
-        commonCodeMapper.page();
+    public List<CommonCode> page() {
+        return commonCodeMapper.page();
     }
 }

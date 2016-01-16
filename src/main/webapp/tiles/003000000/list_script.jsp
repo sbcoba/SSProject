@@ -5,70 +5,63 @@
 	var apiUrl = '${ctx}/api/003000000/'
 	var test = "";
 	$(function() {
-			var tab = $('#list')
+		var tab = $('#list')
 
-			var xhr = function () {
-				return $.ajax({
-					url : apiUrl + 'page.do',
-					dataType : 'json',
-					type : 'GET',
-					cache : false,
-				});
-			};
-			var renderer = function (r, c, item) {
-				switch(c)
-				{
-					case 0:
-						return item.eNo;
-
-					case 1:
-						return item.eNm;
-
-					case 2:
-						return item.eId;
-						
-					case 3:
-						return item.ePw;
-						
-					case 4:
-						return item.eDept;
-						
-					case 5:
-						return item.ePosi;
-						
-					case 6:
-						return item.eInDt;
-
-					default:
-						return item.eOutDt;
-				}
-			};
-
-			tab.tabulate({
-
-				source: xhr,
-				renderer: renderer,
-				pagination: $('#pagination'),
-				pagesI18n: function(str) {
-					switch(str) {
-						case 'next':
-							return 'Aage';
-
-						case 'prev':
-							return 'Peeche';
-					}
-				}
-			})
-			.on('loadfailure', function (){
-				console.error(arguments);
-				alert('Failed!');
+		var xhr = function() {
+			return $.ajax({
+				url : apiUrl + 'page.do',
+				data : {
+					currPage : arguments[0].page,
+					pageSize : 10
+				},
+				dataType : 'json',
+				type : 'GET',
+				cache : false,
 			});
+		};
 
-			tab.trigger('load');
-		
+		var renderer = function(r, c, item) {
+			switch (c) {
+			case 0:
+				return item.eNo;
+
+			case 1:
+				return item.eNm;
+
+			case 2:
+				return item.eId;
+
+			case 3:
+				return item.ePw;
+
+			case 4:
+				return item.eDept;
+
+			case 5:
+				return item.ePosi;
+
+			case 6:
+				return item.eInDt;
+
+			default:
+				return item.eOutDt;
+			}
+		};
+
+		tab.tabulate({
+			source : xhr,
+			renderer : renderer,
+			pagination : $('#paging'),
+		}).on('loadfailure', function() {
+			console.error(arguments);
+			alert('Failed!');
+		});
+
+		tab.trigger('load');
+
 		/* 부서 셀렉트박스 */
 		setSelectize('eDept', 'DEPT_CD');
-		
+
 		/* 직책 셀렉트박스 */
 		setSelectize('ePosi', 'POSI_CD');
 	});

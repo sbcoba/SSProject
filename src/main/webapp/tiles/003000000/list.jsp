@@ -32,7 +32,7 @@
 	<div class="row">
 		<div class="col-xs-2 list-btn text-primary"></div>
 		<div class="col-xs-8 text-center">
-			<ul id="pagination" class="pagination"></ul>
+			<ul id="paging" class="pagination"></ul>
 		</div>
 		<div class="col-xs-2 text-right list-btn text-primary">
 			<button class="btn btn-default" type="button" data-toggle="modal"
