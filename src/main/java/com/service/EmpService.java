@@ -24,7 +24,10 @@ public class EmpService extends EgovAbstractServiceImpl {
     public String createEmpNo() {
     	return empMapper.createEmpNo();
     }
-	public List<EmpInfo> getPage() {
-		return empMapper.getPage();
+	public List<EmpInfo> getPage(int currPage, int pageSize) {
+		return empMapper.getPage(currPage, pageSize);
+	}
+	public int getTotPage(int pageSize) {
+		return empMapper.getTotPage(pageSize);
 	}
 }
