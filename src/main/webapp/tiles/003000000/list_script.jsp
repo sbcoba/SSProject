@@ -7,12 +7,12 @@
 	$(function() {
 		var tab = $('#list')
 
-		var xhr = function() {
+		var xhr = function(data) {
 			return $.ajax({
 				url : apiUrl + 'page.do',
 				data : {
-					currPage : arguments[0].page,
-					pageSize : 10
+					page : data.page,
+ 					limit : 10
 				},
 				dataType : 'json',
 				type : 'GET',

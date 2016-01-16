@@ -1,7 +1,6 @@
 package com.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.mapper.EmpMapper;
 import com.vo.EmpInfo;
+import com.vo.Page;
+import com.vo.PagingPram;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 
@@ -24,10 +25,25 @@ public class EmpService extends EgovAbstractServiceImpl {
     public String createEmpNo() {
     	return empMapper.createEmpNo();
     }
-	public List<EmpInfo> getPage(int currPage, int pageSize) {
-		return empMapper.getPage(currPage, pageSize);
+	public Page<EmpInfo> getPage(PagingPram pagingPram) {
+		Page<EmpInfo> page = new Page<EmpInfo>();
+		List<EmpInfo> list = empMapper.getPage(pagingPram);
+		
+		int count = empMapper.getTotPage();
+		
+		if(count < pagingPram.getLimit())
+		{
+			pagingPram.setLimit(count);
+		}
+		
+		page.setItems(list);
+		page.setTotalPages((int)Math.ceil(count/(double)pagingPram.getLimit()));
+		page.setCurrPage(pagingPram.getPage());
+		page.setCount(count);
+
+		return page;
 	}
-	public int getTotPage(int pageSize) {
-		return empMapper.getTotPage(pageSize);
+	public int getTotPage() {
+		return empMapper.getTotPage();
 	}
 }
