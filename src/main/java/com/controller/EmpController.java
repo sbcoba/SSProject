@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.EmpService;
 import com.vo.EmpInfo;
+import com.vo.Page;
+import com.vo.PagingPram;
 
 @Controller
 public class EmpController {
@@ -37,14 +40,9 @@ public class EmpController {
     
     @ResponseBody
     @RequestMapping(value = "/api/003000000/page", method = RequestMethod.GET)
-    public HashMap<String, Object> api003000000page(@RequestParam("currPage") int currPage, @RequestParam("pageSize") int pageSize) {
-    	
-    	HashMap<String, Object> hm = new HashMap<String, Object>();
-    	hm.put("items", empService.getPage(currPage, pageSize));
-    	hm.put("currPage", currPage);
-    	hm.put("totalPages", empService.getTotPage(pageSize));
-    	
-    	return hm;
+    public Page<EmpInfo> api003000000page(PagingPram pagingPram, HttpServletRequest request) {
+    	pagingPram.setCondition(request);
+    	return empService.getPage(pagingPram);
     }
 
 }
