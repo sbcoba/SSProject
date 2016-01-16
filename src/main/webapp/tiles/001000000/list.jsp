@@ -8,7 +8,6 @@
                 <table id="list" class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-width-num">번호</th>
                             <th class="col-width-name">코드구분</th>
                             <th class="col-width-id">코드</th>
                             <th class="col-width-name">코드명</th>
