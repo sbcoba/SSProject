@@ -12,7 +12,7 @@
 		<result column="E_OUT_DT" property="eOutDt" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="getPage" resultMap="resultMap">
+	<select id="getPage" resultMap="resultMap" parameterType="com.vo.PagingPram">
 		SELECT *
 		FROM (
 		SELECT B.*, ROWNUM AS RN
@@ -28,13 +28,13 @@
 		FROM EMP
 		ORDER BY E_ID DESC
 		) B
-		WHERE ROWNUM <![CDATA[<=]]> #{currPage} * #{pageSize}
+		WHERE ROWNUM <![CDATA[<=]]> #{end}
 		)
-		WHERE RN >= (#{currPage} - 1) * #{pageSize} + 1
+		WHERE RN >= #{start}
 	</select>
 	
 	<select id="getTotPage" resultType="int">
-		SELECT CEIL(COUNT(*) / (#{pageSize}*1.0)) FROM EMP
+		SELECT COUNT(*) FROM EMP
 	</select>
 
 	<select id="createEmpNo" resultType="java.lang.String">
