@@ -34,6 +34,12 @@
 	<div class="row">
 		<div class="col-xs-2 list-btn text-primary"></div>
 		<div class="col-xs-8 text-center">
+			<ul id="paging" class="pagination"></ul>
+		</div>
+
+	<div class="row">
+		<div class="col-xs-2 list-btn text-primary"></div>
+		<div class="col-xs-8 text-center">
 			<ul id="pagination" class="pagination"></ul>
 		</div>
 		<div class="col-xs-2 text-right list-btn text-primary">
@@ -56,27 +62,27 @@
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">분류번호</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "F_SEQ" id="formGroupInputSmall"
+								<input class="form-control" type="text" name = "f_SEQ" id="formGroupInputSmall"
 									placeholder="자동생성" disabled>
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">비품명</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "F_NM" id="formGroupInputSmall">
+								<input class="form-control" type="text" name = "f_NM" id="formGroupInputSmall">
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">품종</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "F_KIND" id="formGroupInputSmall"
+								<input class="form-control" type="text" name = "f_KIND" id="formGroupInputSmall"
 									placeholder="공란 시 사원번호와 동일하게 등록">
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">단위</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "F_UNIT" id="formGroupInputSmall">
+								<input class="form-control" type="text" name = "f_UNIT" id="formGroupInputSmall">
 							</div>
 						</div>
 						<div class="form-group form-group-sm">

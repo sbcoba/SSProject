@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="../../inc/common.jsp"%>
 <script>
-    var apiUrl = '${ctx}/api/001000000/'
+    var apiUrl = '${ctx}/api/001000000/';
 
     $(function () {
         $('#list').tabulate({
@@ -38,9 +38,16 @@
         })/* .on('render', cellEllipsis).trigger('load'); */
     });
 
-    $('#insertForm').submit(function (e) {
-        
-    });
+    $('#form').submit(function () {
+        $.ajax({
+            url: apiUrl + 'insert.do?' + $('#form').serialize(),
+            type: 'GET',
+            dataType: 'json',
+            cache: false,
+            success : function () {
+            }
+        });
+    })
 
     function showInsertForm() {
         $('#insertForm').modal();

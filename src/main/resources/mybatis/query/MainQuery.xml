@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.MainMapper">
+    <select id="getOptions" parameterType="java.lang.String" resultType="hashmap">
+        SELECT CD_V
+             , CD_NM
+          FROM BASE_CD
+         WHERE CD_USE = 'Y'
+           AND CD_TP = #{cdTp}
+        ORDER BY CD_SORT
+    </select>
+</mapper>
