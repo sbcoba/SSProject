@@ -22,6 +22,7 @@ jQuery(document).ready(function() {
   }); 
 });	
 
+var ctrlSelecize = [];
 function setSelectize(objNm, cdTpVal)
 {
 	var jsonVal;
@@ -33,12 +34,13 @@ function setSelectize(objNm, cdTpVal)
 		cache : false,
 		success : function(data) {
 			jsonVal = JSON.stringify(data);
-			$('#'+ objNm).selectize({
-				valueField:  'CD_V',
-			    labelField:  'CD_NM',
-			    searchField: 'CD_NM',
-			    options : eval(jsonVal),
-			}); 
+			$select = $('#'+ objNm).selectize({
+							valueField:  'CD_V',
+						    labelField:  'CD_NM',
+						    searchField: 'CD_NM',
+						    options : eval(jsonVal),
+						}); 
+			ctrlSelecize[objNm] = $select[0].selectize;
 		},
 		error : function(xhr, status, error) {
 			alert("에러발생");
