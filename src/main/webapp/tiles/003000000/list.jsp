@@ -36,7 +36,12 @@
 		</div>
 		<div class="col-xs-2 text-right list-btn text-primary">
 			<button class="btn btn-default" type="button" data-toggle="modal"
-				data-target="#formModal" onclick="showInsertForm();">등록</button>
+				data-target="#formModal" onclick="insertAct();">등록</button>
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="updateAct();">수정</button>
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="deleteAct();">삭제</button>
+			
 		</div>
 	</div>
 	<!-- /.row -->
@@ -44,17 +49,20 @@
 	<div id="insertForm" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 		<form class="form-horizontal" id="emp" method="post">
+		<input type="hidden" name="act">
+		<input type="hidden" name="hENo">
+		
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">코드등록</h4>
+					<h4 class="modal-title">사원정보 등록</h4>
 				</div>
 				<div class="modal-body">
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">사원번호</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" id="formGroupInputSmall" name="eNO"
+								<input class="form-control" type="text" id="formGroupInputSmall" name="eNo"
 									placeholder="자동생성" disabled>
 							</div>
 						</div>
@@ -98,8 +106,8 @@
 
 				</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Register</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-default">등록</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 		</form>

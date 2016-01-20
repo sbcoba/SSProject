@@ -14,23 +14,36 @@
 
 	<select id="getPage" resultMap="resultMap" parameterType="com.vo.PagingPram">
 		SELECT *
-		FROM (
-		SELECT B.*, ROWNUM AS RN
-		FROM (
-		SELECT E_NO
-		, E_NM
-		, E_ID
-		, E_PW
-		, E_DEPT
-		, E_POSI
-		, E_IN_DT
-		, E_OUT_DT
-		FROM EMP
-		ORDER BY E_ID DESC
-		) B
-		WHERE ROWNUM <![CDATA[<=]]> #{end}
-		)
+		  FROM (
+				SELECT B.*, ROWNUM AS RN
+				  FROM (
+						SELECT E_NO
+							 , E_NM
+							 , E_ID
+							 , E_PW
+							 , E_DEPT
+							 , E_POSI
+							 , E_IN_DT
+							 , E_OUT_DT
+							FROM EMP
+						ORDER BY E_NO DESC
+				       ) B
+				WHERE ROWNUM <![CDATA[<=]]> #{end}
+			    )
 		WHERE RN >= #{start}
+	</select>
+	
+	<select id="getEmpInfo" resultMap="resultMap">
+		SELECT E_NO
+			 , E_NM
+			 , E_ID
+			 , E_PW
+			 , E_DEPT
+			 , E_POSI
+			 , E_IN_DT
+			 , E_OUT_DT
+		  FROM EMP
+		 WHERE E_NO = #{eNo}
 	</select>
 	
 	<select id="getTotPage" resultType="int">
@@ -44,30 +57,42 @@
 	</select>
 
 	<insert id="insert" parameterType="com.vo.EmpInfo">
-	INSERT INTO EMP
-	(
-	E_NO
-	, E_NM
-	,
-	E_ID
-	, E_PW
-	, E_DEPT
-	, E_POSI
-	, E_IN_DT
-	, E_OUT_dT
-	)
-	VALUES
-	(
-	TO_CHAR(SYSDATE,
-	'YYYY') || LPAD(EMP_NUM_SEQ.NEXTVAL, 3, '0')
-	, #{eNm}
-	, #{eId}
-	, #{ePw}
-	,
-	#{eDept}
-	, #{ePosi}
-	, #{eInDt}
-	, #{eOutDt}
-	)
+		INSERT INTO EMP
+		(
+			  E_NO
+			, E_NM
+			, E_ID
+			, E_PW
+			, E_DEPT
+			, E_POSI
+			, E_IN_DT
+			, E_OUT_dT
+		)
+		VALUES
+		(
+			  TO_CHAR(SYSDATE,'YYYY') || LPAD(EMP_NUM_SEQ.NEXTVAL, 3, '0')
+			, #{eNm}
+			, #{eId}
+			, #{ePw}
+			, #{eDept}
+			, #{ePosi}
+			, #{eInDt}
+			, #{eOutDt}
+		)
 	</insert>
+	
+	<update id="update" parameterType="com.vo.EmpInfo">
+		UPDATE EMP
+		   SET E_NM = #{eNm}
+			 , E_ID = NVL(#{eId}, E_NO)
+			 , E_DEPT = #{eDept}
+			 , E_POSI = #{ePosi}
+			 , E_IN_DT = #{eInDt}
+			 , E_OUT_dT = #{eOutDt}
+		 WHERE E_NO = #{eNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM EMP WHERE E_NO = #{eNo}
+	</delete>
 </mapper>

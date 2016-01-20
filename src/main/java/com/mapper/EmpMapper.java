@@ -12,7 +12,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface EmpMapper {
     void insert(EmpInfo vo);
+    void update(EmpInfo vo);
+	void delete(String eNo);
     String createEmpNo();
 	List<EmpInfo> getPage(PagingPram pagingPram);
 	int getTotPage();
+	EmpInfo getEmpInfo(String eNo);
 }
