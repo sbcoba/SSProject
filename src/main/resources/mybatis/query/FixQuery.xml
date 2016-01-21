@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.FixMapper">
+	<resultMap type="com.vo.FixInfo" id="resultMap">
+		<id column="F_SEQ" property="f_SEQ" jdbcType="VARCHAR" />
+		<result column="F_NM" property="f_NM" jdbcType="VARCHAR" />
+		<result column="F_KIND" property="f_KIND" jdbcType="VARCHAR" />
+		<result column="F_UNIT" property="f_UNIT" jdbcType="VARCHAR" />
+		<result column="F_YEAR" property="f_YEAR" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="getPage"  resultMap="resultMap" parameterType="com.vo.PagingPram">
+		SELECT *
+		FROM (
+		SELECT B.*, ROWNUM AS RN
+		FROM (
+		SELECT 
+		F_SEQ
+		,F_NM
+		,(SELECT A.CD_NM FROM BASE_CD A WHERE A.CD_TP ='F_KIND' AND A.CD_V = F_KIND) AS F_KIND
+		,(SELECT A.CD_NM FROM BASE_CD A WHERE A.CD_TP ='F_UNIT' AND A.CD_V = F_UNIT) AS F_UNIT	
+		,F_YEAR
+		FROM FIX_TP
+		ORDER BY F_SEQ DESC
+		) B
+		WHERE ROWNUM  <![CDATA[<=]]> #{end}
+		)
+		WHERE RN >= #{start}
+	</select>
+	
+	<select id="getTotPage" resultType="int">
+		SELECT COUNT(*) FROM FIX_TP
+	</select>
+
+	<select id="createF_SEQ" resultType="java.lang.String">
+		SELECT TO_CHAR(SYSDATE,
+		'YYYY') || LPAD(F_NUM_SEQ.NEXTVAL, 3, '0') FROM
+		DUAL
+	</select>
+	
+	<select id="getFixInfo" resultMap="resultMap">
+	SELECT F_SEQ
+		,F_NM
+		,F_KIND		
+		,F_UNIT
+		,F_YEAR
+		FROM FIX_TP
+		WHERE F_SEQ = #{f_SEQ}
+		 
+	</select>
+	
+	<insert id="insert" parameterType="com.vo.FixInfo">
+	INSERT INTO FIX_TP
+	(
+	F_SEQ
+	,F_NM
+	,F_KIND		
+	,F_UNIT
+	,F_YEAR
+	)
+	VALUES
+	(
+	TO_CHAR(SYSDATE,
+	'YYYY') || LPAD(F_NUM_SEQ.NEXTVAL, 3, '0')
+	, #{f_NM}
+	, #{f_KIND}
+	, #{f_UNIT}
+	, #{f_YEAR}
+	)
+	</insert>
+	
+	<update id="update" parameterType="com.vo.FixInfo">
+		UPDATE FIX_TP
+		   SET F_SEQ = #{f_SEQ}
+			 , F_NM = #{f_NM}
+			 , F_KIND = #{f_KIND}
+			 , F_UNIT = #{f_UNIT}
+			 , F_YEAR = #{f_YEAR}
+		 WHERE F_SEQ = #{f_SEQ}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM FIX_TP WHERE F_SEQ = #{f_SEQ}
+	</delete>
+	
+</mapper>
