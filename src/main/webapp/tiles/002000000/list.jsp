@@ -15,8 +15,7 @@
 							<th class="col-width-id">품종</th>
 							<th class="col-width-name">단위</th>
 							<th class="col-width-email">내용연수</th>
-							<!-- 
-							<th class="col-width-tel">직책</th>
+							<!-- <th class="col-width-tel">직책</th>
 							<th class="col-width-tel">입사일</th>
 							<th class="col-width-tel">퇴사일</th>
 							 -->
@@ -36,23 +35,30 @@
 		<div class="col-xs-8 text-center">
 			<ul id="paging" class="pagination"></ul>
 		</div>
-
+	<div class="col-xs-2 text-right list-btn text-primary">
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="insertAct();">등록</button>
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="updateAct();">수정</button>
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="deleteAct();">삭제</button>
+			
+		</div>
 	<div class="row">
 		<div class="col-xs-2 list-btn text-primary"></div>
 		<div class="col-xs-8 text-center">
 			<ul id="pagination" class="pagination"></ul>
-		</div>
-		<div class="col-xs-2 text-right list-btn text-primary">
-			<button class="btn btn-default" type="button" data-toggle="modal"
-				data-target="#formModal" onclick="showInsertForm();">등록</button>
 		</div>
 	</div>
 	<!-- /.row -->
 	<!-- Modal -->
 	<div id="insertForm" class="modal fade" role="dialog">
 		<div class="modal-dialog">
+		<form class="form-horizontal" id = "fix" method="post">
+		<input type="hidden" name="act">
+		<input type="hidden" name="hF_SEQ">
 			<!-- Modal content-->
-			<form id="form" class="form-horizontal" method="post">
+		
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -75,20 +81,22 @@
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">품종</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "f_KIND" id="formGroupInputSmall"
-									placeholder="공란 시 사원번호와 동일하게 등록">
+								
+								<select name="f_KIND" id="f_KIND" class='selectize-control' placeholder="비품종류를 선택 해주세요."></select>
+	
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">단위</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "f_UNIT" id="formGroupInputSmall">
+								
+								<select name="f_UNIT" id="f_UNIT" class='selectize-control' placeholder="비품단위를 선택 해주세요."></select>
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">내용연수</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "F_YEAR"  id="formGroupInputSmall">
+								<input class="form-control" type="text" name = "f_YEAR"  id="formGroupInputSmall">
 							</div>
 						</div>
 						<!-- 

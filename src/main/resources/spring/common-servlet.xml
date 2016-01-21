@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- 뭔지확인해볼것 (선언하고 @ResponseBody 정상작동, 셀렉티즈할때)-->
-	<annotation-driven />
-
     <resources mapping="/resources/**" location="/resources/" />
     <resources mapping="/js/**" location="/js/" /> 
     <resources mapping="/css/**" location="/css/" />
@@ -17,8 +14,6 @@
 
     <context:component-scan base-package="com" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
     </context:component-scan>
 
     <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
