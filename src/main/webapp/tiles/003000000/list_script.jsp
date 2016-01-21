@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../../inc/common.jsp"%>
 <script>
 	var apiUrl = '${ctx}/api/003000000/'
@@ -39,10 +40,11 @@
 				return item.ePosi;
 
 			case 6:
-				return item.eInDt;
+				return defultFmtDate(item.eInDt);
 
 			default:
-				return item.eOutDt;
+				return defultFmtDate(item.eOutDt);
+
 			}
 		};
 		tab.tabulate({
@@ -105,6 +107,10 @@
 					if (tag.length > 0) {//해당 요소가 존재 하면
 						switch (tag[0].tagName) {//각 태그 유형에 맞게 값 할당
 							case "INPUT":
+								if(name == "eInDt" || name == "eOutDt")
+								{
+									value = defultFmtDate(value);
+								}
 								tag.val(value); 
 								break;
 							case "SELECT":

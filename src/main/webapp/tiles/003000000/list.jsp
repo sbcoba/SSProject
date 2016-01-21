@@ -94,13 +94,13 @@
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">입사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_1" name="eInDt" maxlength="10">
+								<input class="form-control cDatePicker" type="text" id="date_1" name="eInDt" maxlength="10" data-mask="0000-00-00" data-mask-selectonfocus="true" >
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">퇴사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_2" name="eOutDt" maxlength="10">
+								<input class="form-control cDatePicker" type="text" id="date_2" name="eOutDt" maxlength="10" data-mask="0000-00-00" data-mask-selectonfocus="true">
 							</div>
 						</div>
 
