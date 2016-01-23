@@ -3,53 +3,83 @@
 <script>
     var apiUrl = '${ctx}/api/001000000/';
 
-    $(function () {
-        $('#list').tabulate({
-            source: function(data) {
-                return alert("hi");
-                    $.ajax({
-                    url: baseApiUrl + 'page.do?',
-                    dataType: 'json',
-                    cache: false
-                });
-            },/*
-            renderer: function(r, c, item, dataSet) {
-                switch (c) {
-                    case 0:
-                        return escapeHtml(item.acId);
-                }
-            },
-            cellClass: function(r, c, item, dataSet) {
-                switch (c) {
-                    case 0:
-                    case 1:
-                    case 2:
-                        return 'text-center text-middle';
+    $(function() {
+        var xhr = function(data) {
+            return $.ajax({
+                url : apiUrl + 'page.do',
+                data : {
+                    page : data.page,
+                    limit : 10
+                },
+                dataType : 'json',
+                type : 'GET',
+                cache : false,
+            });
+        }
 
-                    case 4:
-                    case 5:
-                        return 'cell-ellipsis text-center text-middle ';
+        var renderer = function(r, c, item) {
+            switch (c) {
+            case 0:
+                return item.cdTp;
 
-                    default:
-                        return 'text-middle';
-                }
-            }, */
-            pagination: $('#pagination')
-        })/* .on('render', cellEllipsis).trigger('load'); */
-    });
+            case 1:
+                return item.cdV;
 
-    $('#form').submit(function () {
-        $.ajax({
-            url: apiUrl + 'insert.do?' + $('#form').serialize(),
-            type: 'GET',
-            dataType: 'json',
-            cache: false,
-            success : function () {
+            case 2:
+                return item.cdNm;
+
+            case 3:
+                return item.cdSort;
+
+            case 4:
+                return item.cdUse;
+
+            default:
+                return;
             }
+        }
+
+        var cellClass = function(r, c, item) {
+            switch (c) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    return 'text-center text-middle';
+
+                default:
+                    return 'text-center text-middle';
+            }
+        }
+
+        $('#list').tabulate({
+            source : xhr,
+            renderer : renderer,
+            cellClass : cellClass,
+            pagination : $('#pagination'),
+        }).on('loadfailure', function() {
+            console.error(arguments);
+            alert('Failed!');
         });
-    })
+
+        $('#list').trigger('load');
+
+    });
 
     function showInsertForm() {
         $('#insertForm').modal();
     }
+
+    $('#form').submit(function() {
+        $.ajax({
+            url : apiUrl + 'insert.do?' + $('#form').serialize(),
+            type : 'GET',
+            dataType : 'json',
+            cache : false,
+            success : function() {
+            }
+        });
+    })
 </script>
+

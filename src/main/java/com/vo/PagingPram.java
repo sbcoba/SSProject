@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class PagingPram {
+
 	private int page;
 	private int limit;
 	private int start;
@@ -58,15 +59,4 @@ public class PagingPram {
 	{
 		return cond;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

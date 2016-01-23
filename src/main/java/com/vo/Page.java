@@ -3,6 +3,7 @@ package com.vo;
 import java.util.List;
 
 public class Page<T> {
+
 	private List<T> items;	
 	private int totalPages;
 	private int currPage;
