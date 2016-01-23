@@ -8,10 +8,10 @@
 		/*tabulate 선언(그리드 출력)*/
 		var xhr = function(data) {
 			return $.ajax({
-				url : apiUrl + 'page.do',
+				url  : apiUrl + 'page.do',
 				data : {
-					page : data.page, //현재페이지 번호
-					limit : 10		  //한 페이지당 표시할 건수
+				page : data.page, //현재페이지 번호
+				limit : 10		  //한 페이지당 표시할 건수
 				},
 				dataType : 'json',
 				type : 'GET',
@@ -69,6 +69,9 @@
 
 		/* 비품종류 셀렉트박스 */
 		setSelectize('f_UNIT', 'F_UNIT');
+		
+		/* 내용연수 셀렉트박스 */
+		setSelectize('f_YEAR', 'F_YEAR');
 		
 			
 		/* 부서 셀렉트박스 

@@ -88,15 +88,14 @@
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">단위</label>
-							<div class="col-sm-8">
-								
+							<div class="col-sm-8">								
 								<select name="f_UNIT" id="f_UNIT" class='selectize-control' placeholder="비품단위를 선택 해주세요."></select>
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">내용연수</label>
 							<div class="col-sm-8">
-								<input class="form-control" type="text" name = "f_YEAR"  id="formGroupInputSmall">
+							<select name="f_YEAR" id="f_YEAR" class='selectize-control' placeholder="내용연수를 선택 해주세요."></select>
 							</div>
 						</div>
 						<!-- 

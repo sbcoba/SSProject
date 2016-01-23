@@ -45,7 +45,6 @@ public class FixService {
 		page.setTotalPages((int)Math.ceil(count/(double)pagingPram.getLimit()));
 		page.setCurrPage(pagingPram.getPage());
 		page.setCount(count);
-
 		return page;
 	}
 	public int getTotPage() {
@@ -54,8 +53,7 @@ public class FixService {
 	public FixInfo getFixInfo(String f_SEQ) {
 		return FixMapper.getFixInfo(f_SEQ);
 	}
-	
-	
+		
 //  public void insert(FixInfo vo) {
 //	FixMapper.insert(vo);
 //}
