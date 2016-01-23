@@ -10,14 +10,14 @@
 					class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th class="col-width-num">사원번호</th>
-							<th class="col-width-name">사원명</th>
-							<th class="col-width-id">아이디</th>
-							<th class="col-width-name">비밀번호</th>
-							<th class="col-width-email">부서</th>
-							<th class="col-width-tel">직책</th>
-							<th class="col-width-tel">입사일</th>
-							<th class="col-width-tel">퇴사일</th>
+							<th width="15%">사원번호</th>
+							<th width="10%">사원명</th>
+							<th width="15%">아이디</th>
+							<th width="12%">비밀번호</th>
+							<th width="12%">부서</th>
+							<th width="12%">직책</th>
+							<th width="12%">입사일</th>
+							<th width="12%">퇴사일</th>
 					</thead>
 					</tr>
 					<tbody>
@@ -94,13 +94,13 @@
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">입사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_1" name="eInDt" maxlength="10">
+								<input class="form-control cDatePicker" type="text" id="date_1" name="eInDt" maxlength="10" data-mask="0000-00-00" data-mask-selectonfocus="true" >
 							</div>
 						</div>
 						<div class="form-group form-group-sm">
 							<label class="col-sm-2 control-label" for="formGroupInputSmall">퇴사일</label>
 							<div class="col-sm-8">
-								<input class="form-control cDatePicker" type="text" id="date_2" name="eOutDt" maxlength="10">
+								<input class="form-control cDatePicker" type="text" id="date_2" name="eOutDt" maxlength="10" data-mask="0000-00-00" data-mask-selectonfocus="true">
 							</div>
 						</div>
 
