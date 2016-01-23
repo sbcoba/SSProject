@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/egovframework.rte.fdl.cmmn-3.1.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/egovframework.rte.psl.dataaccess-3.1.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4jdbc4-1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc14.jar"/>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -33,9 +37,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/05. workspace_sts/dev/SSProject/src/main/webapp/WEB-INF/lib/egovframework.rte.fdl.cmmn-3.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/05. workspace_sts/dev/SSProject/src/main/webapp/WEB-INF/lib/egovframework.rte.psl.dataaccess-3.1.0.jar"/>
-	<classpathentry kind="lib" path="D:/05. workspace_sts/dev/SSProject/src/main/webapp/WEB-INF/lib/log4jdbc4-1.2.jar"/>
-	<classpathentry kind="lib" path="D:/05. workspace_sts/dev/SSProject/src/main/webapp/WEB-INF/lib/ojdbc14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -22,6 +22,13 @@ public class EmpService extends EgovAbstractServiceImpl {
     public void insert(EmpInfo vo) {
     	empMapper.insert(vo);
     }
+	public void update(EmpInfo vo) {
+		empMapper.update(vo);
+	}
+	public void delete(String eNo) {
+		empMapper.delete(eNo);
+		
+	}
     public String createEmpNo() {
     	return empMapper.createEmpNo();
     }
@@ -45,5 +52,8 @@ public class EmpService extends EgovAbstractServiceImpl {
 	}
 	public int getTotPage() {
 		return empMapper.getTotPage();
+	}
+	public EmpInfo getEmpInfo(String eNo) {
+		return empMapper.getEmpInfo(eNo);
 	}
 }

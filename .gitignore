@@ -1,6 +1,7 @@
 /bin/
 /target/
 src/main/resources/rebel.xml
+
 *.classpath
 .settings/org.eclipse.wst.common.component
 

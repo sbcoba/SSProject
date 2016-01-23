@@ -39,7 +39,7 @@
             }
         }
 
-        var cellClass = function(r, c, item, dataSet) {
+        var cellClass = function(r, c, item) {
             switch (c) {
                 case 0:
                 case 1:
