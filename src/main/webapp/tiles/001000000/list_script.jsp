@@ -65,6 +65,25 @@
 
         $('#list').trigger('load');
 
+        //Grid
+        mygrid = new dhtmlXGridObject('gridbox');
+
+        mygrid.setImagePath("${ctx}/img/dhtmlx/");                 
+        mygrid.setHeader("Sales,Book title,Author,Price");//the headers of columns  
+        mygrid.setInitWidths("100,250,150,100");          //the widths of columns  
+        mygrid.setColAlign("right,left,left,left");       //the alignment of columns   
+        mygrid.setColTypes("ro,ed,ed,ed");                //the types of columns  
+        mygrid.setColSorting("int,str,str,int");          //the sorting types   
+        mygrid.init();      //finishes initialization and renders the grid on the page 
+        
+        data={
+                rows:[
+                    { id:1, data: ["A Time to Kill", "John Grisham", "100"]},
+                    { id:2, data: ["Blood and Smoke", "Stephen King", "1000"]},
+                    { id:3, data: ["The Rainmaker", "John Grisham", "-200"]}
+                ]
+            };
+            mygrid.parse(data,"json"); //takes the name and format of the data source
     });
 
     function showInsertForm() {

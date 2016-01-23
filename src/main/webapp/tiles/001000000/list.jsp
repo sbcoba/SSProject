@@ -70,6 +70,7 @@
         </div>
     </div>
     <!-- modal end -->
+    <div id="gridbox" style="width:700px;height:400px;"></div>
 </div>
 <!-- page.contents -->
 
