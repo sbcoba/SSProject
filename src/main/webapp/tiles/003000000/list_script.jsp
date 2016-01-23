@@ -47,9 +47,20 @@
 
 			}
 		};
+// 		var cellClass = function(r, c, item, dataSet) {
+//             switch (c) {
+//                 case 0:
+//                 case 1:
+//                 case 2:
+//                 case 3:
+//                 case 4:
+//  			    default: return 'text-center text-middle';
+//             }
+//         }
 		tab.tabulate({
 			source : xhr,
 			renderer : renderer,
+// 			cellClass : cellClass,
 			pagination : $('#paging'),
 		}).on('loadfailure', function() {//error 표시
 			console.error(arguments);
