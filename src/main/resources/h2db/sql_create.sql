@@ -12,7 +12,7 @@ CREATE SEQUENCE EMP_NUM_SEQ
   NOCYCLE
   CACHE 20;
   
-  -- 공통코드
+-- 공통코드
 CREATE TABLE BASE_CD (
 	CD_TP   VARCHAR2(10)  NOT NULL, -- 코드구분
 	CD_V    VARCHAR2(5)   NOT NULL, -- 코드
@@ -66,9 +66,9 @@ CREATE TABLE FIX_ST (
 	F_SEQ       VARCHAR2(15)  NOT NULL, -- 분류번호
 	FJ_GET_DT   VARCHAR2(10)  NULL,     -- 취득일자
 	FJ_PUT_DT   VARCHAR2(10)  NULL,     -- 정리일자
-	FJ_MD_DT    VARCHAR2(20)  NULL,     -- 모델번호
-	FJ_MK_DT    VARCHAR2(20)  NULL,     -- 제조번호
-	FJ_SIZE     VARCHAR2(5)   NULL,     -- 규격
+	FJ_MD_NO    VARCHAR2(20)  NULL,     -- 모델번호
+	FJ_MK_NO    VARCHAR2(20)  NULL,     -- 제조번호
+	FJ_SIZE     VARCHAR2(20)  NULL,     -- 규격
 	FJ_MK_COM   VARCHAR2(50)  NULL,     -- 제작회사
 	FJ_BUY_ITEM VARCHAR2(5)   NULL,     -- 구입과목
 	FJ_USE      VARCHAR2(5)   NULL,     -- 용도
@@ -102,12 +102,11 @@ ALTER TABLE FIX_ST
 
 -- 비품변동관리
 CREATE TABLE FIX_MV (
-	FB_SEQ     VARCHAR2(5)   NOT NULL, -- 부서정보
+	FB_DEPT    VARCHAR2(5)   NOT NULL, -- 부서정보
 	FJ_SEQ     NUMBER        NOT NULL, -- 등록번호
 	F_SEQ      VARCHAR2(15)  NOT NULL, -- 분류번호
 	E_NO       VARCHAR2(7)   NULL,     -- 사원번호
 	FB_PUT_DT  VARCHAR2(10)  NULL,     -- 정리일자
-	FB_MG_EMP  VARCHAR2(10)  NULL,     -- 운용자
 	FB_LOC_1   VARCHAR2(5)   NULL,     -- 비치건물
 	FB_LOC_2   VARCHAR2(20)  NULL,     -- 비치실명
 	FB_LOC_3   VARCHAR2(20)  NULL,     -- 비치호실
@@ -128,7 +127,7 @@ CREATE TABLE FIX_MV (
 -- 비품변동관리 기본키
 CREATE UNIQUE INDEX PK_FIX_MV
 	ON FIX_MV ( -- 비품변동관리
-		FB_SEQ ASC, -- 부서정보
+		FB_DEPT ASC, -- 부서정보
 		FJ_SEQ ASC, -- 등록번호
 		F_SEQ  ASC  -- 분류번호
 	);
@@ -138,7 +137,7 @@ ALTER TABLE FIX_MV
 	ADD
 		CONSTRAINT PK_FIX_MV -- 비품변동관리 기본키
 		PRIMARY KEY (
-			FB_SEQ, -- 부서정보
+			FB_DEPT, -- 부서정보
 			FJ_SEQ, -- 등록번호
 			F_SEQ   -- 분류번호
 		);
