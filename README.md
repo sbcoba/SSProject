@@ -9,7 +9,7 @@ Library
 * tiles 2.1
 * jQeury 2.1 & plugIn (ui, datePicker, tabulatez, mask ..)
 * selecetize 2.0
-* Dhtmlx 4.6 (Grid)
+* dhtmlx 4.6 (grid)
 
 CSS 
 * bootstrap 3.3 & bootstrap Theme
