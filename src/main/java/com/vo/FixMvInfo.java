@@ -6,6 +6,7 @@ public class FixMvInfo {
 	private String fjSeq;
 	private String fSeq;
 	private String eNo;
+	private String eNm;
 	private String fbPutDt;
 	private String fbLoc1;
 	private String fbLoc2;
@@ -46,6 +47,12 @@ public class FixMvInfo {
 	}
 	public void seteNo(String eNo) {
 		this.eNo = eNo;
+	}
+	public String geteNm() {
+		return eNm;
+	}
+	public void seteNm(String eNm) {
+		this.eNm = eNm;
 	}
 	public String getFbPutDt() {
 		return fbPutDt;

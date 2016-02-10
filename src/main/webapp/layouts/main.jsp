@@ -124,7 +124,7 @@
                             <a href="${ctx}/content/003000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
                         </li>
                          <li>
-                            <a href="${ctx}/content/005000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> dhtmlx</span></a>
+                            <a href="${ctx}/content/005000000/list.do"><i class="icon-star"></i> <span class="hidden-tablet"> 비품변동관리</span></a>
                         </li>
                         <li>
                             <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Dropdown</span> <span class="label label-important"> 3 </span></a>

@@ -6,6 +6,7 @@
 		<result column="FJ_SEQ"     property="fjSeq"     jdbcType="VARCHAR" />
 		<result column="F_SEQ"      property="fSeq"      jdbcType="VARCHAR" />
 		<result column="E_NO"       property="eNo"       jdbcType="VARCHAR" />
+		<result column="E_NM"       property="eNm"       jdbcType="VARCHAR" />
 		<result column="FB_PUT_DT"  property="fbPutDt"   jdbcType="VARCHAR" />
 		<result column="FB_LOC_1"   property="fbLoc1"    jdbcType="VARCHAR" />
 		<result column="FB_LOC_2"   property="fbLoc2"    jdbcType="VARCHAR" />
@@ -29,6 +30,7 @@
 			 , FJ_SEQ    
 			 , F_SEQ     
 			 , E_NO      
+			 , (SELECT E_NM FROM EMP WHERE EMP.E_NO = FIX_MV.E_NO) E_NM      
 			 , FB_PUT_DT 
 			 , FB_LOC_1  
 			 , FB_LOC_2  

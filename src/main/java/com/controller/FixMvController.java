@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class FixMvController {
     
     @ResponseBody
     @RequestMapping(value = "/api/005000000/dhtmlx", method = RequestMethod.POST)
-    public void api005000000dhtmlx(HttpServletRequest request) {
+    public String api005000000dhtmlx(HttpServletRequest request) {
     	/**
     	 * 1. 한글깨짐현상 (해결)
     	 * 2. act 완료 여부 확인 후 화면 새로 고침(grid reload)
@@ -62,26 +63,34 @@ public class FixMvController {
 		vo.setFbSeqEd(Integer.parseInt(cond.get("c6").equals("") ? "0" : cond.get("c6")));
 		vo.setFbCnt(Integer.parseInt(cond.get("c7").equals("") ? "0" : cond.get("c7")));
 		vo.seteNo(cond.get("c8"));
-		vo.setFbLoc1(cond.get("c9"));
-		vo.setFbLoc3(cond.get("c10"));
-		vo.setFbLoc4(cond.get("c11"));
-		vo.setFbRpCnt(Integer.parseInt(cond.get("c12").equals("") ? "0" : cond.get("c12")));
-		vo.setFbRtCnt(Integer.parseInt(cond.get("c13").equals("") ? "0" : cond.get("c13")));
-		vo.setFbMvCnt(Integer.parseInt(cond.get("c14").equals("") ? "0" : cond.get("c14")));
+		vo.setFbLoc1(cond.get("c10"));
+		vo.setFbLoc3(cond.get("c11"));
+		vo.setFbLoc4(cond.get("c12"));
+		vo.setFbRpCnt(Integer.parseInt(cond.get("c13").equals("") ? "0" : cond.get("c13")));
+		vo.setFbRtCnt(Integer.parseInt(cond.get("c14").equals("") ? "0" : cond.get("c14")));
+		vo.setFbMvCnt(Integer.parseInt(cond.get("c15").equals("") ? "0" : cond.get("c15")));
 		
     	System.out.println(cond);
     	System.out.println(vo.toString());
-    	if(cond.get("!nativeeditor_status").equals("inserted"))
-    	{
-    		fixMvService.insert(vo);
-    	}
-    	else if(cond.get("!nativeeditor_status").equals("updated"))
-    	{
-    		fixMvService.update(vo);
-    	}
-    	else if(cond.get("!nativeeditor_status").equals("deleted"))
-    	{
-    		fixMvService.delete(vo);
-    	}
+    	String msg = "";
+    	try{
+	    	if(cond.get("!nativeeditor_status").equals("inserted"))
+	    	{
+	    		fixMvService.insert(vo);
+	    	}
+	    	else if(cond.get("!nativeeditor_status").equals("updated"))
+	    	{
+	    		fixMvService.update(vo);
+	    	}
+	    	else if(cond.get("!nativeeditor_status").equals("deleted"))
+	    	{
+	    		fixMvService.delete(vo);
+	    	}		
+	    	msg = "{\"status\":\"ok\"}";
+    	} catch (Exception e) {
+    		msg = "{\"action\":\"error\", \"rid\":\""+cond.get("gr_id")+"\"}";
+	    }
+    	
+    	return msg;
     }
 }

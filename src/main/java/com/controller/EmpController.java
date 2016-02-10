@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.EmpService;
+import com.vo.Dhtmlx;
 import com.vo.EmpInfo;
 import com.vo.Page;
 import com.vo.PagingPram;
@@ -60,6 +61,12 @@ public class EmpController {
     public EmpInfo api003000000getEmpInfo(@Param(value="eNo") String eNo) {
     	EmpInfo emp = empService.getEmpInfo(eNo);
     	return emp;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/api/003000000/dhxEmp", method = RequestMethod.GET)
+    public Dhtmlx api003000000dhxEmp(HttpServletRequest request) {
+    	return empService.dhxEmp();
     }
 
 }

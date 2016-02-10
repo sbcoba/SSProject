@@ -14,7 +14,7 @@ CREATE SEQUENCE EMP_NUM_SEQ
   
 -- 공통코드
 CREATE TABLE BASE_CD (
-	CD_TP   VARCHAR2(10)  NOT NULL, -- 코드구분
+	CD_TP   VARCHAR2(20)  NOT NULL, -- 코드구분
 	CD_V    VARCHAR2(5)   NOT NULL, -- 코드
 	CD_NM   VARCHAR2(100) NULL,     -- 코드명
 	CD_SORT NUMBER        NULL,     -- 정렬

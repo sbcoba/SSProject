@@ -59,7 +59,6 @@ function getDhxOptions(cdTpVal)
 		cache : false,
 		async: false,
 		success : function(data) {
-			console.log(data);
 			for(var i=0; i < data.length; i++)
 			{
 				arrOpt[i] = [ data[i].CD_V, data[i].CD_NM ]; 

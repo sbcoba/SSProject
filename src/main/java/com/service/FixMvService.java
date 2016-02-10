@@ -35,13 +35,14 @@ public class FixMvService extends EgovAbstractServiceImpl {
 		Dhtmlx dhtmlx = new Dhtmlx();
 		List<FixMvInfo> fList = fixMvMapper.getPage();
 		List<DhtmlxSub> dList = new ArrayList<DhtmlxSub>();
+		int i = 0;
 		
 		for(FixMvInfo fm : fList)
 		{
 			DhtmlxSub dhtmlxSub = new DhtmlxSub();
 			List<Object> al     = new ArrayList<Object>();
 			
-			dhtmlxSub.setId(fm.getFbDept() + fm.getFjSeq() + fm.getfSeq());
+			dhtmlxSub.setId(String.valueOf(i++));
 			
 			al.add("");
 			al.add(fm.getFjSeq());
@@ -52,6 +53,7 @@ public class FixMvService extends EgovAbstractServiceImpl {
 			al.add(fm.getFbSeqEd());
 			al.add(fm.getFbCnt());
 			al.add(fm.geteNo());
+			al.add(fm.geteNm());
 			al.add(fm.getFbLoc1());
 			al.add(fm.getFbLoc3());
 			al.add(fm.getFbLoc4());
@@ -72,13 +74,14 @@ public class FixMvService extends EgovAbstractServiceImpl {
 		Dhtmlx dhtmlx = new Dhtmlx();
 		List<FixStInfo> fList = fixMvMapper.getTempPage();
 		List<DhtmlxSub> dList = new ArrayList<DhtmlxSub>();
+		int i = 0;
 		
 		for(FixStInfo fm : fList)
 		{
 			DhtmlxSub dhtmlxSub = new DhtmlxSub();
 			List<Object> al     = new ArrayList<Object>();
 			
-			dhtmlxSub.setId(fm.getFjSeq()+fm.getfSeq());
+			dhtmlxSub.setId(String.valueOf(i++));
 			
 			al.add(fm.getFjSeq());
 			al.add(fm.getfSeq());

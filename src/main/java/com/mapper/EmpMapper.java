@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.vo.EmpInfo;
+import com.vo.FixMvInfo;
 import com.vo.PagingPram;
 
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
@@ -18,4 +19,5 @@ public interface EmpMapper {
 	List<EmpInfo> getPage(PagingPram pagingPram);
 	int getTotPage();
 	EmpInfo getEmpInfo(String eNo);
+	List<EmpInfo> dhxEmp();
 }
