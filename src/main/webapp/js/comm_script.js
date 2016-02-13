@@ -22,7 +22,7 @@ $(".cDatePicker").each(function(){
   }); 
 });	
 
-/*   Selectize 셋팅 */ 
+/* Selectize 셋팅 */ 
 var ctrlSelecize = [];
 function setSelectize(objNm, cdTpVal)
 {
@@ -47,6 +47,28 @@ function setSelectize(objNm, cdTpVal)
 			alert("에러발생");
 		}
 	});
+}
+function getDhxOptions(cdTpVal)
+{
+	var arrOpt = [];
+	$.ajax({
+		url : '/SSProject/com/api/selectizeOptions.do',
+		data : {cdTp : cdTpVal},
+		dataType : 'JSON',
+		type : 'GET',
+		cache : false,
+		async: false,
+		success : function(data) {
+			for(var i=0; i < data.length; i++)
+			{
+				arrOpt[i] = [ data[i].CD_V, data[i].CD_NM ]; 
+			}
+		},
+		error : function(xhr, status, error) {
+			alert("에러발생");
+		}
+	});
+	return arrOpt;
 }
 
 Date.prototype.format = function(f) {

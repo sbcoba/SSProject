@@ -21,6 +21,8 @@
 <link href="${ctx}/css/style.css" rel="stylesheet" id="base-style">
 <link href="${ctx}/css/style-responsive.css" rel="stylesheet" id="base-style-responsive">
 <link href="${ctx}/css/selectize.bootstrap3.css" rel="stylesheet" id="selectize-bootstrap3">
+<link href="${ctx}/js/dhtmlx/codebase/dhtmlx.css" rel="stylesheet" id="dthmlx">
+
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
 <style type="text/css">
 .form-horizontal .control-label {/*등록 폼 Title 들여쓰기 조정*/
@@ -121,6 +123,9 @@
                         <li>
                             <a href="${ctx}/content/003000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
                         </li>
+                         <li>
+                            <a href="${ctx}/content/005000000/list.do"><i class="icon-star"></i> <span class="hidden-tablet"> 비품변동관리</span></a>
+                        </li>
                         <li>
                             <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Dropdown</span> <span class="label label-important"> 3 </span></a>
                             <ul>
@@ -218,6 +223,8 @@
     <script src="${ctx}/js/jquery.min.js"></script>
     <script src="${ctx}/js/jquery.tabulatez.js"></script>
     <script src="${ctx}/js/jquery.mask.js"></script>
+    <script src="${ctx}/js/dhtmlx/codebase/dhtmlx.js"></script>
+    <script src="${ctx}/js/dhtmlx/codebase/dhtmlx_deprecated.js"></script>
 
     <script src="${ctx}/js/metro/jquery-migrate-1.0.0.min.js"></script>
     <script src="${ctx}/js/metro/jquery-ui-1.10.0.custom.min.js"></script>

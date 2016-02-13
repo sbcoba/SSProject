@@ -33,6 +33,16 @@
 		WHERE RN >= #{start}
 	</select>
 	
+	<select id="dhxEmp" resultMap="resultMap">
+		SELECT E_NO
+			 , E_NM
+			 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'POSI_CD' AND CD_V = E_POSI) E_POSI
+			 , E_IN_DT
+			 , E_OUT_DT
+		  FROM EMP
+		 ORDER BY E_NO DESC
+	</select>
+	
 	<select id="getEmpInfo" resultMap="resultMap">
 		SELECT E_NO
 			 , E_NM

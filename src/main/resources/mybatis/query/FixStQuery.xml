@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.FixMvMapper">
+	<resultMap type="com.vo.FixStInfo" id="resultTempMap">
+		<result column="FJ_SEQ"      property="fjSeq"     jdbcType="VARCHAR" />
+		<result column="F_SEQ"       property="fSeq"      jdbcType="VARCHAR" />
+		<result column="FJ_GET_DT"   property="fjGetDt"   jdbcType="VARCHAR" />
+		<result column="FJ_PUT_DT"   property="fjPutDt"   jdbcType="VARCHAR" />
+		<result column="FJ_MD_NO"    property="fjMdNo"    jdbcType="VARCHAR" />
+		<result column="FJ_MK_NO"    property="fjMkNo"    jdbcType="VARCHAR" />
+		<result column="FJ_SIZE"     property="fjSize"    jdbcType="VARCHAR" />
+		<result column="FJ_MK_COM"   property="fjMkCom"   jdbcType="VARCHAR" />
+		<result column="FJ_BUY_ITEM" property="fjBuyItem" jdbcType="VARCHAR" />
+		<result column="FJ_USE"      property="fjUse"     jdbcType="VARCHAR" />
+		<result column="FJ_CNT"      property="fjCnt"     jdbcType="NUMERIC" />
+		<result column="FJ_UNIT_AMT" property="fjUnitAmt" jdbcType="NUMERIC" />
+		<result column="FJ_TOT_AMT"  property="fjTotAmt"  jdbcType="NUMERIC" />
+		<result column="FJ_SEQ_ST"   property="fjSeqSt"   jdbcType="NUMERIC" />
+		<result column="FJ_SEQ_ED"   property="fjSeqEd"   jdbcType="NUMERIC" />
+		<result column="REMARK"      property="remark"    jdbcType="VARCHAR" />
+		<result column="INSERT_DT"   property="insertDt"  jdbcType="VARCHAR" />
+		<result column="INSERT_EMP"  property="insertEmp" jdbcType="VARCHAR" />
+		<result column="MODIFY_DT"   property="modifyDt"  jdbcType="VARCHAR" />
+		<result column="MODIFY_EMP"  property="modifyEmp" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getTempPage" resultMap="resultTempMap">
+		SELECT FJ_SEQ     
+			 , F_SEQ      
+			 , FJ_GET_DT  
+			 , FJ_PUT_DT  
+			 , FJ_MD_NO   
+			 , FJ_MK_NO   
+			 , FJ_SIZE    
+			 , FJ_MK_COM  
+			 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'JF_BUY_ITEM' AND CD_V = FJ_BUY_ITEM) FJ_BUY_ITEM
+			 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'F_KIND' AND CD_V = FJ_USE) FJ_USE
+			 , FJ_CNT     
+			 , FJ_UNIT_AMT
+			 , FJ_TOT_AMT 
+			 , FJ_SEQ_ST  
+			 , FJ_SEQ_ED  
+			 , REMARK     
+			 , INSERT_DT  
+			 , INSERT_EMP 
+			 , MODIFY_DT  
+			 , MODIFY_EMP 
+		  FROM FIX_ST
+	</select>
+	
+	
+</mapper>

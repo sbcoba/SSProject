@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.FixMvMapper">
+	<resultMap type="com.vo.FixMvInfo" id="resultMap">
+		<result column="FB_DEPT"    property="fbDept"    jdbcType="VARCHAR" />
+		<result column="FJ_SEQ"     property="fjSeq"     jdbcType="VARCHAR" />
+		<result column="F_SEQ"      property="fSeq"      jdbcType="VARCHAR" />
+		<result column="E_NO"       property="eNo"       jdbcType="VARCHAR" />
+		<result column="E_NM"       property="eNm"       jdbcType="VARCHAR" />
+		<result column="FB_PUT_DT"  property="fbPutDt"   jdbcType="VARCHAR" />
+		<result column="FB_LOC_1"   property="fbLoc1"    jdbcType="VARCHAR" />
+		<result column="FB_LOC_2"   property="fbLoc2"    jdbcType="VARCHAR" />
+		<result column="FB_LOC_3"   property="fbLoc3"    jdbcType="VARCHAR" />
+		<result column="FB_LOC_4"   property="fbLoc4"    jdbcType="VARCHAR" />
+		<result column="FB_CNT"     property="fbCnt"     jdbcType="NUMERIC" />
+		<result column="FB_RP_CNT"  property="fbRpCnt"   jdbcType="NUMERIC" />
+		<result column="FB_RT_CNT"  property="fbRtCnt"   jdbcType="NUMERIC" />
+		<result column="FB_MV_CNT"  property="fbMvCnt"   jdbcType="NUMERIC" />
+		<result column="FB_SEQ_ST"  property="fbSeqSt"   jdbcType="NUMERIC" />
+		<result column="FB_SEQ_ED"  property="fbSeqEd"   jdbcType="NUMERIC" />
+		<result column="REMARK"     property="remark"    jdbcType="VARCHAR" />
+		<result column="INSERT_DT"  property="insertDt"  jdbcType="VARCHAR" />
+		<result column="INSERT_EMP" property="insertEmp" jdbcType="VARCHAR" />
+		<result column="MODIFY_DT"  property="modifyDt"  jdbcType="VARCHAR" />
+		<result column="MODIFY_EMP" property="modifyEmp" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getPage" resultMap="resultMap">
+		SELECT FB_DEPT   
+			 , FJ_SEQ    
+			 , F_SEQ     
+			 , E_NO      
+			 , (SELECT E_NM FROM EMP WHERE EMP.E_NO = FIX_MV.E_NO) E_NM      
+			 , FB_PUT_DT 
+			 , FB_LOC_1  
+			 , FB_LOC_2  
+			 , FB_LOC_3  
+			 , FB_LOC_4  
+			 , NVL(FB_CNT, 0) FB_CNT
+			 , NVL(FB_RP_CNT, 0) FB_RP_CNT
+			 , NVL(FB_RT_CNT, 0) FB_RT_CNT
+			 , NVL(FB_MV_CNT, 0) FB_MV_CNT
+			 , NVL(FB_SEQ_ST, 0) FB_SEQ_ST
+			 , NVL(FB_SEQ_ED, 0) FB_SEQ_ED
+			 , REMARK    
+			 , INSERT_DT 
+			 , INSERT_EMP
+			 , MODIFY_DT 
+			 , MODIFY_EMP
+		  FROM FIX_MV
+	</select>
+	<insert id="insert" parameterType="com.vo.FixMvInfo">
+		INSERT INTO FIX_MV
+		(
+			  FJ_SEQ
+			, F_SEQ
+			, FB_PUT_DT
+			, FB_DEPT
+			, FB_SEQ_ST
+			, FB_SEQ_ED
+			, FB_CNT
+		<if test="eNo != ''">
+			, E_NO
+		</if>
+			, FB_LOC_1
+			, FB_LOC_3
+			, FB_LOC_4
+			, FB_RP_CNT
+			, FB_RT_CNT
+			, FB_MV_CNT
+		)
+		VALUES
+		(
+			  #{fjSeq}
+			, #{fSeq}    
+			, #{fbPutDt} 
+			, #{fbDept}  
+			, #{fbSeqSt} 
+			, #{fbSeqEd}
+			, #{fbCnt}
+		<if test="eNo != ''">
+			, #{eNo}
+		</if>
+			, #{fbLoc1}  
+			, #{fbLoc3}  
+			, #{fbLoc4} 
+			, #{fbRpCnt} 
+			, #{fbRtCnt} 
+			, #{fbMvCnt} 
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.vo.FixMvInfo">
+		UPDATE FIX_MV
+		   SET FB_PUT_DT = #{fbPutDt}
+			 , FB_DEPT 	 = #{fbDept}  
+			 , FB_SEQ_ST = #{fbSeqSt}
+			 , FB_SEQ_ED = #{fbSeqEd}
+			 , FB_CNT    = #{fbCnt}  
+		<if test="eNo != ''">
+			 , E_NO      = #{eNo}    
+		</if>
+			 , FB_LOC_1  = #{fbLoc1} 
+			 , FB_LOC_3  = #{fbLoc3} 
+			 , FB_LOC_4  = #{fbLoc4} 
+			 , FB_RP_CNT = #{fbRpCnt}
+			 , FB_RT_CNT = #{fbRtCnt}
+			 , FB_MV_CNT = #{fbMvCnt}
+		 WHERE FJ_SEQ	 = #{fjSeq}
+		   AND F_SEQ	 = #{fSeq}
+		   AND FB_DEPT 	 = #{fbDept}
+	</update>
+	
+	<delete id="delete" parameterType="com.vo.FixMvInfo">
+		DELETE FROM FIX_MV 
+		 WHERE FJ_SEQ	 = #{fjSeq}
+		   AND F_SEQ	 = #{fSeq}
+		   AND FB_DEPT 	 = #{fbDept}
+	</delete>
+	
+</mapper>

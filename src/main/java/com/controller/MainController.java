@@ -38,9 +38,6 @@ public class MainController {
     @ResponseBody
     @RequestMapping(value = "/com/api/selectizeOptions", method = RequestMethod.GET)
     public List<Map<String, String>> getOptions(@RequestParam("cdTp") String cdTp) {
-    	
-    	List<Map<String, String>> ls = mainService.getOptions(cdTp);
-    	
-    	return ls;
+    	return mainService.getOptions(cdTp);
     }
 }

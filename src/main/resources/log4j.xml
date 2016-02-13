@@ -32,9 +32,14 @@
         <level value="info" />
     </logger>
 
+    <logger name="org.h2">
+        <level value="DEBUG" />
+    </logger>
+
+
     <!-- Root Logger -->
     <root>
-        <priority value="warn" />
+        <priority value="info" />
         <appender-ref ref="console" />
     </root>
 

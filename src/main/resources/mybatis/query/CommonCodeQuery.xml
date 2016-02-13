@@ -16,10 +16,32 @@
                      cd_nm,
                      cd_sort,
                      cd_use)
-        VALUES     (#{cdTp},
-                    #{cdV},
-                    #{cdNm},
-                    #{cdSort},
-                    #{cdUse})
+        VALUES      (#{cdTp},
+                     #{cdV},
+                     #{cdNm},
+                     #{cdSort},
+                     #{cdUse})
     </insert>
+
+    <select id="getPage" resultMap="resultMap" parameterType="com.vo.PagingPram">
+        SELECT * 
+            FROM (
+            SELECT B.*, ROWNUM AS RN
+              FROM (
+                SELECT cd_tp,
+                       cd_v,
+                       cd_nm,
+                       cd_sort,
+                       cd_use
+                  From base_cd
+              ORDER BY cd_tp DESC
+            ) B
+            WHERE ROWNUM <![CDATA[<=]]> #{end}
+        )
+        WHERE RN >= #{start}
+    </select>
+
+    <select id="getTotPage" resultType="int">
+        SELECT COUNT(*) FROM base_cd
+    </select>
 </mapper>
