@@ -36,7 +36,15 @@
 				return item.f_YEAR;
 			}
 		};
-				
+			
+		
+		
+		
+		
+		
+		
+		
+		
 		tab.tabulate({
 			source : xhr,
 			renderer : renderer,
@@ -191,9 +199,6 @@
 
 				dataString = $("form#fix").serialize();
 				dataString = dataString.replace("hF_SEQ=", "f_SEQ=");
-				
-					   
-			        
 				$.ajax({
 					url : apiUrl + actUrl,	
 					data : dataString,
@@ -201,8 +206,6 @@
 					type : 'POST',
 					cache : false,
 				});
-			   			        
 			});
-	
 	
 </script>

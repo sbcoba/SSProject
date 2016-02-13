@@ -2,10 +2,8 @@
 	pageEncoding="EUC-KR"%>
 <%@ include file="../../inc/common.jsp"%>
 
-
-
-
 <!-- page.contents -->
+<div id="grid" style="width:800px; height:500px;"></div>
 <div>
 	<div class="page-content">
 		<div class="row">
@@ -46,7 +44,8 @@
 				data-target="#formModal" onclick="updateAct();">수정</button>
 			<button class="btn btn-default" type="button" data-toggle="modal"
 				data-target="#formModal" onclick="deleteAct();">삭제</button>
-			
+			<button class="btn btn-default" type="button" data-toggle="modal"
+				data-target="#formModal" onclick="pagejAct();">json</button>
 		</div>
 	<div class="row">
 		<div class="col-xs-2 list-btn text-primary"></div>
@@ -124,10 +123,7 @@
 				</div>
 			</form>
 			
-			
-	
-    <div id="grid" style="width:800px; height:500px;"></div>
-			
+						
 		</div>
 	</div>
 	

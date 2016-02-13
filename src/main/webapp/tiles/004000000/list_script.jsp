@@ -1,12 +1,35 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ page import="java.util.List" %>
 <%@ include file="../../inc/common.jsp"%>
 <script>
-	var apiUrl = '${ctx}/api/002000000/';
+	var apiUrl = '${ctx}/api/004000000/';
 	var tab = $('#list')
+
+	var grid;
+//function doOnLoad(){
+    // Grid가 표시될 Html Element의 ID(grid)를 지정하여 Grid Object를 생성한다.
+    grid = new dhtmlXGridObject("grid");
+    grid.setImagePath("${ctx}/js/dhtmlx/imgs");        
+    //grid.setSkin("dhxacc_skyblue");        
+    
+    // Grid의 타이틀
+    grid.setHeader("f_SEQ, f_NM, f_KIND, f_UNIT, f_YEAR, 비고");
+    // Grid의 컬럼 폭
+    grid.setInitWidths("100,150,120,100,100,100");
+    // Grid의 컬럼별 정렬
+    grid.setColAlign("center,center,center,center,center,center");
+    // Grid의 컬럼별 속성(ro : Read Only, ed : Editable, txt : Text, ch : Check Box, co : Combo Box ...)
+    grid.setColTypes("ed,ed,ed,ed,ed,ed");
+    // Grid의 컬럼별 속성 타입(int : 숫자, str : 문자, date : 날짜)
+    grid.setColSorting("str,str,str,str,str,str");
+    grid.init();
+		
 	$(function() {			
 		/*tabulate 선언(그리드 출력)*/
+		   
 		var xhr = function(data) {
+			
 			return $.ajax({
 				url  : apiUrl + 'page.do',
 				data : {
@@ -18,25 +41,23 @@
 				cache : false,
 			});
 		};		
+		
+	
 		var renderer = function(r, c, item) {
 			switch (c) {//c는 각 칼럼 index고 return에는 json으로 넘어오는 name과 맞춰줌.
 			case 0:
 				return item.f_SEQ;
-
 			case 1:
 				return item.f_NM;
-
 			case 2:
 				return item.f_KIND;
-
 			case 3:
-				return item.f_UNIT;
-				
+				return item.f_UNIT;				
 			case 4:
 				return item.f_YEAR;
 			}
 		};
-				
+			
 		tab.tabulate({
 			source : xhr,
 			renderer : renderer,
@@ -53,7 +74,7 @@
 		}).on("render", function(e) {//렌더시 기존 선택한 사번값 초기화
 			$("form#fix [name=hF_SEQ]").val('');
 		});
-
+		
 		tab.trigger('load');
 
 		/* 비품종류 셀렉트박스 */
@@ -63,16 +84,56 @@
 		setSelectize('f_UNIT', 'F_UNIT');
 		
 		/* 내용연수 셀렉트박스 */
-		setSelectize('f_YEAR', 'F_YEAR');
-		
+		setSelectize('f_YEAR', 'F_YEAR');		
 			
 		/* 부서 셀렉트박스 
 		setSelectize('eDept', 'DEPT_CD');*/
 
 		/* 직책 셀렉트박스 
 		setSelectize('ePosi', 'POSI_CD');*/
+		//function(data) {
+						
+			$.ajax({
+			url  : apiUrl + 'page.do',
+			data : {
+			page : 1, //현재페이지 번호
+			limit : 10		  //한 페이지당 표시할 건수
+			},
+			dataType : 'json',
+			type : 'GET',
+			cache : false,  
+			success:function(data){//불러왔을때 실행될 함수(data에 list값 json 파싱)	
+			
+				$.each(data.items, function(i) {//json 파싱
+		 		 	//alert(data.items[i].f_SEQ+data.items[i].f_NM)	
+					grid.addRow(i, [data.items[i].f_SEQ,data.items[i].f_NM, data.items[i].f_KIND,data.items[i].f_UNIT, data.items[i].f_YEAR]);		
+			})		
+			
+		/* 	  	$.each(data, function(name, value) {//json 파싱
+ 		 		 		grid.addRow(0, [name["totalPages"],value[2,3]]);		
+				})	
+				 */
+				//JSONobject jsonobject = new JSONobject()
+				
+			   	  // grid.addRow(0, [0,tag[0].tagName,tag[0].tagValue])					   	 
+			      //alert(name.key + ":" +name.value);		
+			      //alert(o);			      			     
+			      
+			   	  /*     data1={
+				     	    rows:[
+				     	        { id:1, data: ["A Time to Kill", "John Grisham", "100","200"]},
+				     	        { id:2, data: ["Blood and Smoke", "Stephen King", "1000"]},
+				     	        { id:3, data: ["The Rainmaker", "John Grisham", "-200"]}
+				     	    ]
+			   			    }				     	
+				     	//grid.parse(data,"json"); //takes the name and format of the data source */
+			    },
+				error : function(data, status, error) {
+					alert("에러발생");
+				}
+			});
+		}); 
 		
-		});
 	function insertAct() {
 		/*엘레멘트 초기화(비품등록을 위함)*/
 		$("form#fix").find('input[type="text"], textarea, select').val('');
@@ -106,8 +167,9 @@
 			success : function(data) {
 				$.each(data, function(name, value) {//json 파싱
 					var tag = $("form#fix [name=" + name + "]");
-					
+				
 					if (tag.length > 0) {//해당 요소가 존재 하면
+						
 						switch (tag[0].tagName) {//각 태그 유형에 맞게 값 할당
 							case "INPUT":
 								tag.val(value); 
@@ -159,10 +221,11 @@
 		}
 		tab.trigger('load');
 	}
+	
 	function showInsertForm() {
 		$('#insertForm').modal();
 	}	
-	
+		
 	$('form#fix').submit(
 			//insert, update, 유무에 따라 act.do호출
 			function() {
@@ -191,9 +254,6 @@
 
 				dataString = $("form#fix").serialize();
 				dataString = dataString.replace("hF_SEQ=", "f_SEQ=");
-				
-					   
-			        
 				$.ajax({
 					url : apiUrl + actUrl,	
 					data : dataString,
@@ -201,8 +261,27 @@
 					type : 'POST',
 					cache : false,
 				});
-			   			        
-			});
+			});		
+	
+	function pagejAct() {	
+
+		var params = {'test1'   : "test1", 'test2': "test2"};
+		  $.ajax({
+	      url: apiUrl + 'url.do?',
+	      type: 'POST',
+	      data: JSON.stringify(params),  
+	      dataType: 'json', 
+	      timeout: 2000, 
+	      async:false, 
+	      contentType: "application/json", 
+	      errorMsg: "데이터 조회시 오류발생.",
+	      success:function(jsonObj){
+	      console.log(jsonObj);
+	      }
+	      });
+	
+	}
+	
 	
 	
 </script>

@@ -20,7 +20,7 @@ public interface FixMapper {
 	int getTotPage();
 	FixInfo getFixInfo(String f_SEQ);
 	
-/*    void insert(FixInfo vo);
+	/*    void insert(FixInfo vo);
     String createF_SEQ();
 	List<FixInfo> getPage(@Param(value = "currPage") int currPage, @Param(value = "pageSize") int pageSize);
 	int getTotPage(@Param(value = "pageSize") int pageSize);*/

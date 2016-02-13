@@ -56,6 +56,11 @@ public class FixController {
     }
     
     @ResponseBody
+    @RequestMapping(value = "/api/002000001/page", method = RequestMethod.GET)
+    public void api002000001page(PagingPram pagingPram, HttpServletRequest request) {
+    }
+    
+    @ResponseBody
     @RequestMapping(value = "/api/002000000/getFixInfo", method = RequestMethod.GET)
     public FixInfo api002000000getFixInfo(@Param(value="f_SEQ") String f_SEQ) {
     	   	FixInfo fix = fixService.getFixInfo(f_SEQ);    	
