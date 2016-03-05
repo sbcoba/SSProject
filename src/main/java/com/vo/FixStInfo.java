@@ -1,7 +1,7 @@
 package com.vo;
 
 public class FixStInfo {
-
+	
 	private String fjSeq;
 	private String fSeq;
 	private String fjGetDt;
@@ -12,11 +12,11 @@ public class FixStInfo {
 	private String fjMkCom;
 	private String fjBuyItem;
 	private String fjUse;
-	private int    fjCnt;
-	private int    fjUnitAmt;
-	private int    fjTotAmt;
-	private int    fjSeqSt;
-	private int    fjSeqEd;
+	private int     fjCnt;
+	private int     fjUnitAmt;
+	private int     fjTotAmt;
+	private int     fjSeqSt;
+	private int     fjSeqEd;
 	private String remark;
 	private String insertDt;
 	private String insertEmp;
@@ -141,6 +141,15 @@ public class FixStInfo {
 		return modifyEmp;
 	}
 	public void setModifyEmp(String modifyEmp) {
-		this.modifyEmp = modifyEmp;
+		this.modifyEmp = modifyEmp;		
+	}
+	@Override
+	public String toString() {
+		return "FixStInfo [fjSeq=" + fjSeq + ", fSeq=" + fSeq + ", fjGetDt=" + fjGetDt + ", fjPutDt=" + fjPutDt
+				+ ", fjMdNo=" + fjMdNo + ", fjMkNo=" + fjMkNo + ", fjSize=" + fjSize + ", fjMkCom=" + fjMkCom
+				+ ", fjBuyItem=" + fjBuyItem + ", fjUse=" + fjUse + ", fjCnt=" + fjCnt + ", fjUnitAmt=" + fjUnitAmt
+				+ ", fjTotAmt=" + fjTotAmt + ", fjSeqSt=" + fjSeqSt + ", fjSeqEd=" + fjSeqEd + ", remark=" + remark
+				+ ", insertDt=" + insertDt + ", insertEmp=" + insertEmp + ", modifyDt=" + modifyDt + ", modifyEmp="
+				+ modifyEmp + "]";
 	}
 }

@@ -1,287 +1,165 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ page import="java.util.List" %>
-<%@ include file="../../inc/common.jsp"%>
+<style>
+	.even{
+		background-color:#E6E6FA;
+	}
+	.uneven{
+		background-color:#F0F8FF;
+	}
+</style>
+
 <script>
-	var apiUrl = '${ctx}/api/004000000/';
-	var tab = $('#list')
+	var apiUrl = '${ctx}/api/004000000/'
+	var fixStGrid, popGrid, popWins, dp;
+	var markedArray;
+	$(function() {
+		fixStGrid = new dhtmlXGridObject('gridbox');
+		fixStGrid.setImagePath("${ctx}/js/dhtmlx/skins/web/imgs/");
+		fixStGrid.setHeader("NO,등록번호, 분류번호, 취득일자, 정리일자, 모델번호, 제조번호, 규격,제조회사,구입과목,용도,수량,단가,금액,일련번호_시작,일련번호_끝,비고");
+		fixStGrid.setInitWidths("40,80,80,80,80,80,70,70,80,90,80,80,80,80,90,90");
+ 		fixStGrid.setColAlign("center,center,center,center,center,center,center,center,center,center,center,right,right,right,center,center,center");
+		fixStGrid.setColTypes("cntr,ed,ed,dhxCalendar,dhxCalendar,ed,ed,edn,ed,combo,combo,ed,ed,edn,edn,edn,edn");
+		fixStGrid.setColSorting("na,str,str,date,date,str,str,str,str,combo,combo,int,int,str,str,str,str");
+		//fixStGrid.setColumnHidden(8,true);//pro
+		fixStGrid.setColumnColor("#CCE2FE");
+		fixStGrid.enableColumnAutoSize(true);  
+		fixStGrid.enableAutoHeight(true);
+		fixStGrid.setDateFormat("%Y-%m-%d", "%Y-%m-%d")
+		fixStGrid.setNumberFormat("0,000",11);
+		fixStGrid.setNumberFormat("0,000",12);
+		fixStGrid.setNumberFormat("0,000",13);
+		fixStGrid.init();
+		
+		deptCombo = fixStGrid.getColumnCombo(9);
+		deptCombo.enableFilteringMode(true);
+		deptCombo.addOption(getDhxOptions("JF_BUY_ITEM")); 
+		
 
-	var grid;
-//function doOnLoad(){
-    // Grid가 표시될 Html Element의 ID(grid)를 지정하여 Grid Object를 생성한다.
-    grid = new dhtmlXGridObject("grid");
-    grid.setImagePath("${ctx}/js/dhtmlx/imgs");        
-    //grid.setSkin("dhxacc_skyblue");        
-    
-    // Grid의 타이틀
-    grid.setHeader("f_SEQ, f_NM, f_KIND, f_UNIT, f_YEAR, 비고");
-    // Grid의 컬럼 폭
-    grid.setInitWidths("100,150,120,100,100,100");
-    // Grid의 컬럼별 정렬
-    grid.setColAlign("center,center,center,center,center,center");
-    // Grid의 컬럼별 속성(ro : Read Only, ed : Editable, txt : Text, ch : Check Box, co : Combo Box ...)
-    grid.setColTypes("ed,ed,ed,ed,ed,ed");
-    // Grid의 컬럼별 속성 타입(int : 숫자, str : 문자, date : 날짜)
-    grid.setColSorting("str,str,str,str,str,str");
-    grid.init();
-		
-	$(function() {			
-		/*tabulate 선언(그리드 출력)*/
-		   
-		var xhr = function(data) {
-			
-			return $.ajax({
-				url  : apiUrl + 'page.do',
-				data : {
-				page : data.page, //현재페이지 번호
-				limit : 10		  //한 페이지당 표시할 건수
-				},
-				dataType : 'json',
-				type : 'GET',
-				cache : false,
-			});
-		};		
-		
+		fitCombo = fixStGrid.getColumnCombo(10);
+		fitCombo.enableFilteringMode(true);
+		fitCombo.addOption(getDhxOptions("F_KIND")); 
 	
-		var renderer = function(r, c, item) {
-			switch (c) {//c는 각 칼럼 index고 return에는 json으로 넘어오는 name과 맞춰줌.
-			case 0:
-				return item.f_SEQ;
-			case 1:
-				return item.f_NM;
-			case 2:
-				return item.f_KIND;
-			case 3:
-				return item.f_UNIT;				
-			case 4:
-				return item.f_YEAR;
-			}
-		};
+		fixStGrid.load(apiUrl + "page.do", "json");
+		
+		markedArray = fixStGrid.getStateOfView();
+		
+		dp = new dataProcessor(apiUrl + "dhtmlx.do"); // lock feed url
+		dp.setUpdateMode("off");//셀값을 바꿀때 실시간 db 적용 여부
+		dp.init(fixStGrid);
+		dp.setTransactionMode("POST", false);
+		
+		dp.defineAction("error", function(obj){
+			alert((fixStGrid.getRowIndex(obj.rid)+1) + "번째 저장 실패");
 			
-		tab.tabulate({
-			source : xhr,
-			renderer : renderer,
-			pagination : $('#paging'),
-		}).on('loadfailure', function() {//error 표시
-			console.error(arguments);
-			alert('Failed!');
-		}).on("click", "tbody tr", function(e) {//클릭시 음영 및 사번 셋팅
-			$("#list tbody tr").each(function() {
-				$(this).removeClass("success");
-			});//기존 선택된 음영 제거
-			$(this).addClass("success");//선택된 row 음영 셋팅
-			$("form#fix [name=hF_SEQ]").val($(this).children("td:first").text());//#list tbody에서 클릭한 row의 첫번째 td값(사번)
-		}).on("render", function(e) {//렌더시 기존 선택한 사번값 초기화
-			$("form#fix [name=hF_SEQ]").val('');
+			fixStGrid.setRowTextStyle(obj.rid, "color: red; font-weight: bold;");
 		});
-		
-		tab.trigger('load');
-
-		/* 비품종류 셀렉트박스 */
-		setSelectize('f_KIND', 'F_KIND');
-
-		/* 비품종류 셀렉트박스 */
-		setSelectize('f_UNIT', 'F_UNIT');
-		
-		/* 내용연수 셀렉트박스 */
-		setSelectize('f_YEAR', 'F_YEAR');		
-			
-		/* 부서 셀렉트박스 
-		setSelectize('eDept', 'DEPT_CD');*/
-
-		/* 직책 셀렉트박스 
-		setSelectize('ePosi', 'POSI_CD');*/
-		//function(data) {
-						
-			$.ajax({
-			url  : apiUrl + 'page.do',
-			data : {
-			page : 1, //현재페이지 번호
-			limit : 10		  //한 페이지당 표시할 건수
-			},
-			dataType : 'json',
-			type : 'GET',
-			cache : false,  
-			success:function(data){//불러왔을때 실행될 함수(data에 list값 json 파싱)	
-			
-				$.each(data.items, function(i) {//json 파싱
-		 		 	//alert(data.items[i].f_SEQ+data.items[i].f_NM)	
-					grid.addRow(i, [data.items[i].f_SEQ,data.items[i].f_NM, data.items[i].f_KIND,data.items[i].f_UNIT, data.items[i].f_YEAR]);		
-			})		
-			
-		/* 	  	$.each(data, function(name, value) {//json 파싱
- 		 		 		grid.addRow(0, [name["totalPages"],value[2,3]]);		
-				})	
-				 */
-				//JSONobject jsonobject = new JSONobject()
-				
-			   	  // grid.addRow(0, [0,tag[0].tagName,tag[0].tagValue])					   	 
-			      //alert(name.key + ":" +name.value);		
-			      //alert(o);			      			     
-			      
-			   	  /*     data1={
-				     	    rows:[
-				     	        { id:1, data: ["A Time to Kill", "John Grisham", "100","200"]},
-				     	        { id:2, data: ["Blood and Smoke", "Stephen King", "1000"]},
-				     	        { id:3, data: ["The Rainmaker", "John Grisham", "-200"]}
-				     	    ]
-			   			    }				     	
-				     	//grid.parse(data,"json"); //takes the name and format of the data source */
-			    },
-				error : function(data, status, error) {
-					alert("에러발생");
-				}
-			});
-		}); 
-		
-	function insertAct() {
-		/*엘레멘트 초기화(비품등록을 위함)*/
-		$("form#fix").find('input[type="text"], textarea, select').val('');
-		for ( var i in ctrlSelecize)
-			ctrlSelecize[i].clear();//셀렉티즈 초기화
-		
-		$("form#fix [name=act]").val("insert");
-		
-		//alert(actUrl1);
-		$(".modal-title").text("비품정보 등록");
-		$("button[type=submit]").val("등록");
-		showInsertForm();
-	}
-	function updateAct(obj) {
-		var _f_seq = $("form#fix [name=hF_SEQ]").val();
+// 		dp.attachEvent("onAfterUpdate", function(id, action, tid, response) {
+// 		    alert("onAfterUpdate");
+// 		    return true;
+// 		});
+	/* 	dp.attachEvent("onRowMark", function() {
+			alert("onRowMark");
+		    return true;
+		});
+		dp.attachEvent("onBeforeUpdate", function() {
+			alert("onBeforeUpdate");
+		    return true;
+		}); */
+		dp.attachEvent("onValidatationError", function(id, details) {
+			alert("onValidatationError");
+		    return true;
+		});
+// 		dp.attachEvent("onAfterUpdateFinish", function() {
+// 			alert("onAfterUpdateFinish");
+// 		    return true;
+// 		});//setTransactionMode(true)일때 사용
+		dp.attachEvent("onFullSync", function() {
+			alert("저장 완료.");
+		    return true;
+		})
 	
-		if(_f_seq=="")
+		fixStGrid.attachEvent("onEditCell", function(stage,rId,cInd,nValue,oValue)//비품변동(main) 비품코드 edit시
 		{
-			alert("수정 할 비품을 선택해 주세요.");
-			return false;
-		}
-
-		$.ajax({//수정 할 비품정보 가져옴.
-			url : apiUrl + 'getFixInfo.do?',
-			data : {
-			f_SEQ : _f_seq,
-			},
-			dataType : 'JSON',
-			type : 'GET',
-			cache : false,
-			success : function(data) {
-				$.each(data, function(name, value) {//json 파싱
-					var tag = $("form#fix [name=" + name + "]");
-				
-					if (tag.length > 0) {//해당 요소가 존재 하면
-						
-						switch (tag[0].tagName) {//각 태그 유형에 맞게 값 할당
-							case "INPUT":
-								tag.val(value); 
-								break;
-							case "SELECT":
-								ctrlSelecize[name].setValue(value);
-								break;
+			if(stage == 1)
+			{
+			    if(cInd == 1)//분류코드
+			    {
+			    	popWins = new dhtmlXWindows();
+					var id = "FixSt";
+					var col_title = '비품명, 등록번호, 구입과목, 규격, 용도, 제작회사, 수량, 시작번호, 끝번호';
+	// 				popWins.createWindow(id, x, y, w, h);
+					popWins.createWindow(id, 300, 100, 800, 500);
+	
+					popWins.window(id).setText("비품재고관리");
+					popWins.window(id).setModal(true);
+					var popGrid = popWins.window(id).attachGrid();
+					popGrid.setImagePath("${ctx}/js/dhtmlx/skins/web/imgs/");
+				//	popGrid.setHeader("비품명, 등록번호, 구입과목, 규격, 용도, 제작회사, 수량, 시작번호, 끝번호");
+					popGrid.setHeader(col_title);
+					popGrid.setInitWidths("80,80,80,80,80,80,80,80,80");
+					popGrid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");
+					popGrid.setColSorting("str,str,str,str,str,str,str,str,str");
+					popGrid.init();
+			    	popGrid.load('${ctx}/api/005000001/' + "page.do", "json");
+			    	
+					popGrid.attachEvent("onRowDblClicked", function(sRId,sCInd){//window에서 비품재고 더블클릭시 main grid에 값 세팅
+						if(fixStGrid.getSelectedId().indexOf("i_") != -1)
+						{
+							fixStGrid.cells(rId, 1).setValue(popGrid.cells(sRId, 0).getValue());//비품분류코드
+							fixStGrid.cells(rId, 2).setValue(popGrid.cells(sRId, 1).getValue());//등록번호
+							popWins.unload();
+						}else{
+							alert("기존 정보는 분류코드를 변경할 수 없습니다.");
 						}
-					}
-				})
-			},
-			error : function(xhr, status, error) {
-				alert("에러발생");
-			}
-		});
-		
-		$("form#fix [name=act]").val("update");
-		$(".modal-title").text("비품정보 수정");
-		$("button[type=submit]").text("수정");
-		showInsertForm();
-	}
+					})
+			    }else if(cInd == 2){//운영자
+			    	popWins = new dhtmlXWindows();
+					var id = "Fix";
 	
-	function deleteAct(){
-		var _f_seq = $("form#fix [name=hF_SEQ]").val();
-	
-		
-		if(_f_seq=="")
-		{
-			alert("삭제 할 비품을 선택해 주세요.");
-			return false;
+	// 				popWins.createWindow(id, x, y, w, h);
+					popWins.createWindow(id, 300, 100, 450, 500);	
+					popWins.window(id).setText("비품분류코드 정보");
+					popWins.window(id).setModal(true);
+					var popGrid = popWins.window(id).attachGrid();
+					popGrid.setImagePath("${ctx}/js/dhtmlx/skins/web/imgs/");
+					popGrid.setHeader("분류번호, 비품명, 품종, 단위, 내용연수");
+					popGrid.setInitWidths("80,80,80,80,80");
+					popGrid.setColTypes("ro,ro,ro,ro,ro");
+					popGrid.setColSorting("str,str,str,date,date");
+					popGrid.init();
+			    	popGrid.load('${ctx}/api/004000000/' + "dhxfseq.do", "json");			    	
+					popGrid.attachEvent("onRowDblClicked", function(sRId,sCInd){//window에서 비품재고 더블클릭시 main grid에 값 세팅
+						fixStGrid.cells(rId, 2).setValue(popGrid.cells(sRId, 0).getValue());//비품분류코드
+					//	fixStGrid.cells(rId, 10).setValue(popGrid.cells(sRId, 2).getValue());//등록번호
+						popWins.unload();
+					})
+			    }
+		    }else{
+		    	return true;//return이 없으면 다른 칼럼 값 셋팅 안됨.
+		    }
+		});		
+	});
+/*
+ 
+ 	///dhtmlx 그리드 사용자 정의 셀 type(edncl)
+	function eXcell_edncl(cell){
+		this.base = eXcell_edn;
+		this.base(cell)
+		this.setValue = function(val){
+				if(!val || val.toString()._dhx_trim()=="")
+					val="0";
+				if(val>=0)
+					this.cell.style.color = "green";
+				else
+					this.cell.style.color = "red";
+				this.cell.innerHTML = this.grid._aplNF(val,this.cell._cellIndex);
 		}
-		if(confirm("삭제 하시겠습니까?"))
-		{
-			$.ajax({
-				url : apiUrl + "delete.do",	
-				data : {
-					f_SEQ : _f_seq,
-				},
-				dataType : 'json',
-				type : 'POST',
-				cache : false,
-				success : function(data) {
-					alert("삭제 완료 하였습니다.");
-				},
-				error : function(xhr, status, error) {
-					alert("에러발생");
-				}
-			});
-		}
-		tab.trigger('load');
 	}
+	eXcell_edncl.prototype = new eXcell_edn */
 	
-	function showInsertForm() {
-		$('#insertForm').modal();
-	}	
-		
-	$('form#fix').submit(
-			//insert, update, 유무에 따라 act.do호출
-			function() {
-				/* if ($('input[name=eNm]').val() == "") {
-					alert("사원명을 입력해 주세요.");
-					return false;
-				}
-				if ($('input[name=eDept]').val() == "") {
-					alert("부서를 선택해 주세요.");
-					return false;
-				}
-				if ($('input[name=ePosi]').val() == "") {
-					alert("직책을 선택해 주세요.");
-					return false;
-				}
-				if ($('input[name=eInDt]').val() == "") {
-					alert("입사일을 입력해 주세요.");
-					return false;
-				} 
-				$('input[name=eInDt]').val(
-						$('input[name=eInDt]').val().replace(/-/g, ''))
-				$('input[name=eOutDt]').val(
-						$('input[name=eOutDt]').val().replace(/-/g, ''))
-				*/
-				var actUrl = $("form#fix [name=act]").val() == "insert" ? "insert.do" : "update.do"; 
-
-				dataString = $("form#fix").serialize();
-				dataString = dataString.replace("hF_SEQ=", "f_SEQ=");
-				$.ajax({
-					url : apiUrl + actUrl,	
-					data : dataString,
-					dataType : 'json',
-					type : 'POST',
-					cache : false,
-				});
-			});		
-	
-	function pagejAct() {	
-
-		var params = {'test1'   : "test1", 'test2': "test2"};
-		  $.ajax({
-	      url: apiUrl + 'url.do?',
-	      type: 'POST',
-	      data: JSON.stringify(params),  
-	      dataType: 'json', 
-	      timeout: 2000, 
-	      async:false, 
-	      contentType: "application/json", 
-	      errorMsg: "데이터 조회시 오류발생.",
-	      success:function(jsonObj){
-	      console.log(jsonObj);
-	      }
-	      });
-	
+	function save()
+	{
+		dp.sendData();
 	}
-	
-	
-	
 </script>

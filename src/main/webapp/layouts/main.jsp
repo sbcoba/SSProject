@@ -124,16 +124,19 @@
                             <a href="${ctx}/content/003000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 인사관리</span></a>
                         </li>
                          <li>
-                            <a href="${ctx}/content/005000000/list.do"><i class="icon-star"></i> <span class="hidden-tablet"> 비품변동관리</span></a>
+                            <a href="${ctx}/content/004000000/list.do"><i class="icon-star"></i> <span class="hidden-tablet"> 비품재고관리</span></a>
+                        </li>
+                         <li>
+                            <a href="${ctx}/content/005000000/list.do"><i class="icon-eye-open"></i> <span class="hidden-tablet"> 비품변동관리</span></a>
                         </li>
                         <li>
-                            <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Dropdown</span> <span class="label label-important"> 3 </span></a>
+                            <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i> <span class="hidden-tablet"> Sub Menu </span> <span class="label label-important"> 3 </span></a>
                             <ul>
                                 <li>
-                                    <a class="submenu" href="submenu.html"><i class="icon-file-alt"></i> <span class="hidden-tablet"> Sub Menu 1</span></a>
+                                    <a class="submenu" href="${ctx}/content/002000001/list.do""><i class="icon-file-alt"></i> <span class="hidden-tablet">DHX TEST</span></a>
                                 </li>
                                 <li>
-                                    <a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i> <span class="hidden-tablet"> Sub Menu 2</span></a>
+                                    <a class="submenu" href="${ctx}/content/002000002/list.do"><i class="icon-file-alt"></i> <span class="hidden-tablet">비품분류 DHX </span></a>
                                 </li>
                                 <li>
                                     <a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i> <span class="hidden-tablet"> Sub Menu 3</span></a>
@@ -225,7 +228,6 @@
     <script src="${ctx}/js/jquery.mask.js"></script>
     <script src="${ctx}/js/dhtmlx/codebase/dhtmlx.js"></script>
     <script src="${ctx}/js/dhtmlx/codebase/dhtmlx_deprecated.js"></script>
-
     <script src="${ctx}/js/metro/jquery-migrate-1.0.0.min.js"></script>
     <script src="${ctx}/js/metro/jquery-ui-1.10.0.custom.min.js"></script>
     <script src="${ctx}/js/metro/jquery.ui.touch-punch.js"></script>
@@ -234,13 +236,11 @@
     <script src="${ctx}/js/metro/jquery.cookie.js"></script>
     <script src='${ctx}/js/metro/fullcalendar.min.js'></script>
     <script src='${ctx}/js/metro/jquery.dataTables.min.js'></script>
-
     <script src="${ctx}/js/metro/excanvas.js"></script>
     <script src="${ctx}/js/metro/jquery.flot.js"></script>
     <script src="${ctx}/js/metro/jquery.flot.pie.js"></script>
     <script src="${ctx}/js/metro/jquery.flot.stack.js"></script>
     <script src="${ctx}/js/metro/jquery.flot.resize.min.js"></script>
-
     <script src="${ctx}/js/metro/jquery.chosen.min.js"></script>
     <script src="${ctx}/js/metro/jquery.uniform.min.js"></script>
     <script src="${ctx}/js/metro/jquery.cleditor.min.js"></script>

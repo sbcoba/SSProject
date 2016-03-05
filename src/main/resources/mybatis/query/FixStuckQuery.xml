@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.FixstMapper">
+	<resultMap type="com.vo.FixStInfo" id="resultMap">
+		<result column="FJ_SEQ"      property="fjSeq"     jdbcType="VARCHAR" />
+		<result column="F_SEQ"       property="fSeq"      jdbcType="VARCHAR" />
+		<result column="FJ_GET_DT"   property="fjGetDt"   jdbcType="VARCHAR" />
+		<result column="FJ_PUT_DT"   property="fjPutDt"   jdbcType="VARCHAR" />
+		<result column="FJ_MD_NO"    property="fjMdNo"    jdbcType="VARCHAR" />
+		<result column="FJ_MK_NO"    property="fjMkNo"    jdbcType="VARCHAR" />
+		<result column="FJ_SIZE"     property="fjSize"    jdbcType="VARCHAR" />
+		<result column="FJ_MK_COM"   property="fjMkCom"   jdbcType="VARCHAR" />
+		<result column="FJ_BUY_ITEM" property="fjBuyItem" jdbcType="VARCHAR" />
+		<result column="FJ_USE"      property="fjUse"     jdbcType="VARCHAR" />
+		<result column="FJ_CNT"      property="fjCnt"     jdbcType="NUMERIC" />
+		<result column="FJ_UNIT_AMT" property="fjUnitAmt" jdbcType="NUMERIC" />
+		<result column="FJ_TOT_AMT"  property="fjTotAmt"  jdbcType="NUMERIC" />
+		<result column="FJ_SEQ_ST"   property="fjSeqSt"   jdbcType="NUMERIC" />
+		<result column="FJ_SEQ_ED"   property="fjSeqEd"   jdbcType="NUMERIC" />
+		<result column="REMARK"      property="remark"    jdbcType="VARCHAR" />
+		<result column="INSERT_DT"   property="insertDt"  jdbcType="VARCHAR" />
+		<result column="INSERT_EMP"  property="insertEmp" jdbcType="VARCHAR" />
+		<result column="MODIFY_DT"   property="modifyDt"  jdbcType="VARCHAR" />
+		<result column="MODIFY_EMP"  property="modifyEmp" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.vo.FixInfo" id="resultMap1">
+		<id column="F_SEQ" property="f_SEQ" jdbcType="VARCHAR" />
+		<result column="F_NM" property="f_NM" jdbcType="VARCHAR" />
+		<result column="F_KIND" property="f_KIND" jdbcType="VARCHAR" />
+		<result column="F_UNIT" property="f_UNIT" jdbcType="VARCHAR" />
+		<result column="F_YEAR" property="f_YEAR" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="getPage" resultMap="resultMap">
+	 SELECT FJ_SEQ     
+			 , F_SEQ      
+			 , FJ_GET_DT  
+			 , FJ_PUT_DT  
+			 , FJ_MD_NO   
+			 , FJ_MK_NO   
+			 , FJ_SIZE    
+			 , FJ_MK_COM  
+			 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'JF_BUY_ITEM' AND CD_V = FJ_BUY_ITEM) FJ_BUY_ITEM
+			 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'F_KIND' AND CD_V = FJ_USE) FJ_USE
+			 , FJ_CNT     
+			 , FJ_UNIT_AMT
+			 , FJ_TOT_AMT 
+			 , FJ_SEQ_ST  
+			 , FJ_SEQ_ED  
+			 , REMARK     
+			 , INSERT_DT  
+			 , INSERT_EMP 
+			 , MODIFY_DT  
+			 , MODIFY_EMP 
+		  FROM FIX_ST
+	</select>
+	
+		<insert id="insert" parameterType="com.vo.FixStInfo">
+		INSERT INTO FIX_ST
+		(
+			   FJ_SEQ     
+			 , F_SEQ      
+			 , FJ_GET_DT  
+			 , FJ_PUT_DT  
+			 , FJ_MD_NO   
+			 , FJ_MK_NO   
+			 , FJ_SIZE    
+			 , FJ_MK_COM  
+			 , FJ_BUY_ITEM
+			 , FJ_USE
+			 , FJ_CNT     
+			 , FJ_UNIT_AMT
+			 , FJ_TOT_AMT 
+			 , FJ_SEQ_ST  
+			 , FJ_SEQ_ED  
+			 , REMARK     		)
+		VALUES(
+		  	TO_CHAR(SYSDATE,	'YYYY') || LPAD(FJSEQ.NEXTVAL, 4, '0')
+	   	  	 , #{fSeq}
+			, #{fjGetDt} 
+			, #{fjPutDt}  
+			, #{fjMdNo} 
+			, #{fjMkNo}
+			, #{fjSize}
+			, #{fjMkCom}  
+			, #{fjBuyItem}  
+			, #{fjUse} 
+			, #{fjCnt} 
+			, #{fjUnitAmt} 
+			, #{fjTotAmt}						
+			, #{fjSeqSt} 
+			, #{fjSeqEd}
+			, #{remark}		)
+	</insert>		
+	
+	<update id="update" parameterType="com.vo.FixStInfo">	
+		UPDATE FIX_ST  SET 
+	   FJ_GET_DT  	=	 #{fjGetDt} 
+	 , FJ_PUT_DT  	=	 #{fjPutDt}  
+	 , FJ_MD_NO   	=	 #{fjMdNo} 
+	 , FJ_MK_NO   	=	 #{fjMkNo}
+	 , FJ_SIZE    		=	 #{fjSize}
+	 , FJ_MK_COM  	=	 #{fjMkCom}  
+	 , FJ_BUY_ITEM	=	 #{fjBuyItem}  
+	 , FJ_USE			=	 #{fjUse} 
+	 , FJ_CNT     	=	 #{fjCnt} 
+	 , FJ_UNIT_AMT	=	 #{fjUnitAmt} 
+	 , FJ_TOT_AMT 	=	 #{fjTotAmt}
+	 , FJ_SEQ_ST  	=	 #{fjSeqSt} 
+	 , FJ_SEQ_ED  	=	 #{fjSeqEd}
+	 , REMARK     	=	 #{remark}		 
+		 WHERE FJ_SEQ	 = #{fjSeq}
+		   AND F_SEQ	 = #{fSeq}
+	</update>
+	
+  <delete id="delete" parameterType="com.vo.FixStInfo">
+  
+		DELETE FROM FIX_ST 
+	    WHERE FJ_SEQ	 = #{fjSeq}
+		   AND F_SEQ	 = #{fSeq}
+		   
+	</delete>			
+	
+	<select id="createFJSEQ" resultType="java.lang.String">
+	
+		SELECT TO_CHAR(SYSDATE,
+		'YYYY') || LPAD(FJSEQ.NEXTVAL, 4, '0') FROM
+		DUAL
+		
+	</select>	
+	
+	<select id="createFSEQ" resultType="java.lang.String">
+	
+		SELECT TO_CHAR(SYSDATE,
+		'YYYY') || LPAD(FSEQ.NEXTVAL, 3, '0') FROM
+		DUAL
+		
+	</select>	 		
+	
+	<select id="getFixPage"  resultMap="resultMap1" >
+		
+		SELECT 
+		F_SEQ
+		,F_NM
+		,(SELECT A.CD_NM FROM BASE_CD A WHERE A.CD_TP ='F_KIND' AND A.CD_V = F_KIND) AS F_KIND
+		,(SELECT A.CD_NM FROM BASE_CD A WHERE A.CD_TP ='F_UNIT' AND A.CD_V = F_UNIT) AS F_UNIT	
+		,(SELECT A.CD_NM FROM BASE_CD A WHERE A.CD_TP ='F_YEAR' AND A.CD_V = F_YEAR) AS F_YEAR	
+		FROM FIX_TP
+		ORDER BY F_SEQ DESC
+	
+	</select>	
+</mapper>

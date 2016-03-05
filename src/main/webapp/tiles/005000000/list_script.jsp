@@ -16,7 +16,7 @@
 		fixMvGrid = new dhtmlXGridObject('gridbox');
 		fixMvGrid.setImagePath("${ctx}/js/dhtmlx/skins/web/imgs/");
 		fixMvGrid.setHeader("&nbsp;,분류코드, 등록번호, 정리일자, 운영부서, 최초, 최종, 수량, 운영자사번, 운영자, 비치건물, 비치호실, 부속기타, 처분, 반납, 이동");
-		fixMvGrid.setInitWidths("40,80,80,80,80,50,50,50,50,80,80,100,120,50,50,50");
+		fixMvGrid.setInitWidths("40,90,90,80,80,50,50,50,50,80,80,100,120,50,50,50");
  		fixMvGrid.setColAlign("center,left,left,center,left,right,right,right,center,center,left,left,left,right,right,right");
 		fixMvGrid.setColTypes("cntr,ed,ro,dhxCalendar,combo,edn,edn,edn,ro,ed,combo,ed,ed,edn,edn,edn");
 		fixMvGrid.setColSorting("na,str,str,date,str,int,int,int,str,str,str,str,str,int,int,int");
@@ -116,7 +116,6 @@
 	
 	// 				popWins.createWindow(id, x, y, w, h);
 					popWins.createWindow(id, 300, 100, 450, 500);
-	
 					popWins.window(id).setText("인사정보");
 					popWins.window(id).setModal(true);
 					var popGrid = popWins.window(id).attachGrid();
@@ -140,6 +139,7 @@
 		});
 		
 	});
+	
 /* 	//dhtmlx 그리드 사용자 정의 셀 type(edncl)
 	function eXcell_edncl(cell){
 		this.base = eXcell_edn;
@@ -154,6 +154,7 @@
 				this.cell.innerHTML = this.grid._aplNF(val,this.cell._cellIndex);
 		}
 	}
+	
 	eXcell_edncl.prototype = new eXcell_edn */
 	
 	function save()

@@ -26,12 +26,12 @@ public class FixController {
     @RequestMapping(value = "/api/002000000/insert", method = RequestMethod.POST)
     public void api002000000insert(@Valid FixInfo vo, BindingResult result) {
     	
-    	String newF_SEQ = fixService.createFixNo();    	
+    	String newF_SEQ = fixService.createFixNo();
     	System.out.println(vo.getF_SEQ());
-   		vo.setF_SEQ(newF_SEQ);    	
+   		vo.setF_SEQ(newF_SEQ);
     	System.out.println(vo.getF_SEQ());
     	System.out.println(vo);
-    	fixService.insert(vo);		    	
+    	fixService.insert(vo);
     }	
 
     @RequestMapping(value = "/api/002000000/update", method = RequestMethod.POST)

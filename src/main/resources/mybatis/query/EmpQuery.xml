@@ -17,15 +17,15 @@
 		  FROM (
 				SELECT B.*, ROWNUM AS RN
 				  FROM (
-						SELECT E_NO
-							 , E_NM
-							 , E_ID
-							 , E_PW
-							 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'DEPT_CD' AND CD_V = E_DEPT) E_DEPT
-							 , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'POSI_CD' AND CD_V = E_POSI) E_POSI
-							 , E_IN_DT
-							 , E_OUT_DT
-							FROM EMP
+					   SELECT  E_NO
+							    , E_NM
+							    , E_ID
+							    , E_PW
+							    , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'DEPT_CD' AND CD_V = E_DEPT) E_DEPT
+							    , (SELECT CD_NM FROM BASE_CD WHERE CD_TP = 'POSI_CD' AND CD_V = E_POSI) E_POSI
+							    , E_IN_DT
+							    , E_OUT_DT
+					 	 FROM EMP
 						ORDER BY E_NO DESC
 				       ) B
 				WHERE ROWNUM <![CDATA[<=]]> #{end}

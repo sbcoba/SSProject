@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mapper.FixstMapper">
-	<resultMap type="com.vo.FixstInfo" id="resultMap">
+<mapper namespace="com.mapper.Fixst_Mapper">
+	<resultMap type="com.vo.Fixst_Info" id="resultMap">
 		<id column="F_SEQ" property="f_SEQ" jdbcType="VARCHAR" />
 		<result column="F_NM" property="f_NM" jdbcType="VARCHAR" />
 		<result column="F_KIND" property="f_KIND" jdbcType="VARCHAR" />
 		<result column="F_UNIT" property="f_UNIT" jdbcType="VARCHAR" />
 		<result column="F_YEAR" property="f_YEAR" jdbcType="VARCHAR" />
 	</resultMap>
-
 
 	<select id="getPage"  resultMap="resultMap" parameterType="com.vo.PagingPram">
 		SELECT *
@@ -39,7 +38,7 @@
 		DUAL
 	</select>
 	
-	<select id="getFixInfo" resultMap="resultMap">
+	<select id="getFixst_Info" resultMap="resultMap">
 	SELECT F_SEQ
 		,F_NM
 		,F_KIND		
@@ -50,7 +49,7 @@
 		 
 	</select>
 	
-	<insert id="insert" parameterType="com.vo.FixInfo">
+	<insert id="insert" parameterType="com.vo.Fixst_Info">
 	INSERT INTO FIX_TP
 	(
 	F_SEQ
@@ -70,7 +69,7 @@
 	)
 	</insert>
 	
-	<update id="update" parameterType="com.vo.FixInfo">
+	<update id="update" parameterType="com.vo.Fixst_Info">
 		UPDATE FIX_TP
 		   SET F_SEQ = #{f_SEQ}
 			 , F_NM = #{f_NM}
@@ -84,13 +83,13 @@
 		DELETE FROM FIX_TP WHERE F_SEQ = #{f_SEQ}
 	</delete>
 	
-	<select id="getPagej"  resultMap="resultMap">
-		SELECT F_SEQ
+	<select id="getpagej" resultMap="resultMap">
+	SELECT F_SEQ
 		,F_NM
 		,F_KIND		
 		,F_UNIT
 		,F_YEAR
-		FROM FIX_TP	
+		FROM FIX_TP		 
 	</select>
 	
 	

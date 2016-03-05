@@ -33,19 +33,22 @@
 	</select>
 
 	<select id="createF_SEQ" resultType="java.lang.String">
+	
 		SELECT TO_CHAR(SYSDATE,
 		'YYYY') || LPAD(F_NUM_SEQ.NEXTVAL, 3, '0') FROM
 		DUAL
+		
 	</select>
 	
 	<select id="getFixInfo" resultMap="resultMap">
-	SELECT F_SEQ
-		,F_NM
-		,F_KIND		
-		,F_UNIT
-		,F_YEAR
-		FROM FIX_TP
-		WHERE F_SEQ = #{f_SEQ}
+	
+   SELECT  F_SEQ
+			 ,F_NM
+			 ,F_KIND		
+			 ,F_UNIT
+			 ,F_YEAR
+	FROM FIX_TP
+   WHERE F_SEQ = #{f_SEQ}
 		 
 	</select>
 	
