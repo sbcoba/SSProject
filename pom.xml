@@ -224,6 +224,34 @@
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
         </dependency>
+        <dependency>
+            <groupId>egovframework.rte.fdl</groupId>
+            <artifactId>cmmn</artifactId>
+            <version>3.1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/egovframework.rte.fdl.cmmn-3.1.0.jar</systemPath>
+        </dependency>      
+        <dependency>
+            <groupId>egovframework.rte.psl</groupId>
+            <artifactId>dataaccess</artifactId>
+            <version>3.1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/egovframework.rte.psl.dataaccess-3.1.0.jar</systemPath>
+        </dependency>        
+        <dependency>
+            <groupId>net.sf</groupId>
+            <artifactId>log4jdbc4</artifactId>
+            <version>1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/log4jdbc4-1.2.jar</systemPath>
+        </dependency>
+				<dependency>
+						<groupId>com.oracle</groupId>
+						<artifactId>ojdbc14</artifactId>
+						<version>9.0.2.0.0</version>
+						<scope>system</scope>
+            <systemPath>${project.basedir}/lib/ojdbc14.jar</systemPath>
+				</dependency>
     </dependencies>
     <build>
         <plugins>
